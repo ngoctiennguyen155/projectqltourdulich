@@ -1,0 +1,58 @@
+﻿@model IEnumerable<projecttour.Models.tour_nhanvien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nv_ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nv_sdt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nv_ngaysinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nv_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nv_nhiemvu)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nv_ten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nv_sdt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nv_ngaysinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nv_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nv_nhiemvu)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.nv_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.nv_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.nv_id })
+        </td>
+    </tr>
+}
+
+</table>

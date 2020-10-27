@@ -1,0 +1,52 @@
+﻿@model IEnumerable<projecttour.Models.tour>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tour_ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tour_mota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tour_gia.gia_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tour_loai.loai_ten)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tour_ten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tour_mota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tour_gia.gia_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.tour_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.tour_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.tour_id })
+        </td>
+    </tr>
+}
+
+</table>

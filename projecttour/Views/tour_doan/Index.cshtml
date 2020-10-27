@@ -1,0 +1,58 @@
+﻿@model IEnumerable<projecttour.Models.tour_doan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.doan_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.doan_ngaydi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.doan_ngayve)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.doan_chitietchuongtrinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tour.tour_ten)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.doan_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.doan_ngaydi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.doan_ngayve)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.doan_chitietchuongtrinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tour.tour_ten)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.doan_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.doan_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.doan_id })
+        </td>
+    </tr>
+}
+
+</table>
