@@ -13,10 +13,10 @@ namespace projecttour.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class tour_dulichEntities : DbContext
+    public partial class tour_dulichEntities1 : DbContext
     {
-        public tour_dulichEntities()
-            : base("name=tour_dulichEntities")
+        public tour_dulichEntities1()
+            : base("name=tour_dulichEntities1")
         {
         }
     

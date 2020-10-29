@@ -1,0 +1,58 @@
+﻿@model IEnumerable<projecttour.Models.tour_khachhang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.kh_ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kh_sdt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kh_ngaysinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kh_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kh_cmnd)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.kh_ten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kh_sdt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kh_ngaysinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kh_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kh_cmnd)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.kh_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.kh_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.kh_id })
+        </td>
+    </tr>
+}
+
+</table>

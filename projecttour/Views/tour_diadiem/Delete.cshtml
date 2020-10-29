@@ -1,4 +1,4 @@
-﻿@model projecttour.Models.tour
+﻿@model projecttour.Models.tour_diadiem
 
 @{
     ViewBag.Title = "Delete";
@@ -9,39 +9,31 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>tour</h4>
+    <h4>tour_diadiem</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.tour_ten)
+            @Html.DisplayNameFor(model => model.dd_thanhpho)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tour_ten)
+            @Html.DisplayFor(model => model.dd_thanhpho)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tour_mota)
+            @Html.DisplayNameFor(model => model.dd_ten)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tour_mota)
+            @Html.DisplayFor(model => model.dd_ten)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.block)
+            @Html.DisplayNameFor(model => model.dd_mota)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.block)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tour_loai.loai_ten)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tour_loai.loai_ten)
+            @Html.DisplayFor(model => model.dd_mota)
         </dd>
 
     </dl>

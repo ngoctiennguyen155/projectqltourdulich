@@ -6,47 +6,58 @@
 }
 
 <h2>Index</h2>
-
+@TempData["msg"]
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.tour_ten)
+            ID
+            @*@Html.DisplayNameFor(model => model.tour_ten)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tour_mota)
+            Name
+            @*@Html.DisplayNameFor(model => model.tour_ten)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tour_gia.gia_id)
+            Description
+            @* @Html.DisplayNameFor(model => model.tour_mota)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tour_loai.loai_ten)
+            Status
+            @*@Html.DisplayNameFor(model => model.block)*@
         </th>
-        <th></th>
+        <th>
+            Type
+            @*@Html.DisplayNameFor(model => model.tour_loai.loai_ten)*@
+        </th>
+        <th>Options</th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tour_ten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tour_mota)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tour_gia.gia_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.tour_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.tour_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.tour_id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.tour_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tour_ten)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tour_mota)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.block)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.tour_id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.tour_id })
+    </td>
+</tr>
 }
 
 </table>

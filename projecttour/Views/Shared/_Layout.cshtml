@@ -16,13 +16,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("3TTour", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "font-size: 30px;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Tour", "Index", "tours")</li>
                     <li>@Html.ActionLink("Đoàn Khách", "Index", "tour_doan")</li>
                     <li>@Html.ActionLink("Nhân Viên", "Index", "tour_nhanvien")</li>
+                    <li>@Html.ActionLink("Khách hàng", "Index", "tour_khachhang")</li>
+                    <li>@Html.ActionLink("Địa điểm", "Index", "tour_diadiem")</li>
+                    <li>@Html.ActionLink("Loại hình du lịch", "Index", "tour_loai")</li>
+                    <li>@Html.ActionLink("Loại chi phí", "Index", "tour_loaichiphii")</li>
+
+
+
                 </ul>
             </div>
         </div>

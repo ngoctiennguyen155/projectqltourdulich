@@ -12,7 +12,7 @@ namespace projecttour.Controllers
 {
     public class tour_nhanvienController : Controller
     {
-        private tour_dulichEntities db = new tour_dulichEntities();
+        private tour_dulichEntities1 db = new tour_dulichEntities1();
 
         // GET: tour_nhanvien
         public ActionResult Index()

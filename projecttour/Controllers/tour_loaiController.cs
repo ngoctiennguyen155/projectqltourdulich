@@ -10,114 +10,107 @@ using projecttour.Models;
 
 namespace projecttour.Controllers
 {
-    public class tour_doanController : Controller
+    public class tour_loaiController : Controller
     {
         private tour_dulichEntities1 db = new tour_dulichEntities1();
-        // load địa điểm & chi phí
-       
-        // GET: tour_doan
+
+        // GET: tour_loai
         public ActionResult Index()
         {
-            var tour_doan = db.tour_doan.Include(t => t.tour);
-            return View(tour_doan.ToList());
+            return View(db.tour_loai.ToList());
         }
 
-        // GET: tour_doan/Details/5
+        // GET: tour_loai/Details/5
         public ActionResult Details(int? id)
         {
-            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tour_doan tour_doan = db.tour_doan.Find(id);
-            if (tour_doan == null)
+            tour_loai tour_loai = db.tour_loai.Find(id);
+            if (tour_loai == null)
             {
                 return HttpNotFound();
             }
-            return View(tour_doan);
+            return View(tour_loai);
         }
 
-        // GET: tour_doan/Create
+        // GET: tour_loai/Create
         public ActionResult Create()
         {
-            ViewBag.tour_id = new SelectList(db.tours, "tour_id", "tour_ten");
             return View();
         }
 
-        // POST: tour_doan/Create
+        // POST: tour_loai/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "doan_id,tour_id,doan_name,doan_ngaydi,doan_ngayve,doan_chitietchuongtrinh")] tour_doan tour_doan)
+        public ActionResult Create([Bind(Include = "loai_id,loai_ten,loai_mota")] tour_loai tour_loai)
         {
             if (ModelState.IsValid)
             {
-                db.tour_doan.Add(tour_doan);
+                db.tour_loai.Add(tour_loai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.tour_id = new SelectList(db.tours, "tour_id", "tour_ten", tour_doan.tour_id);
-            return View(tour_doan);
+            return View(tour_loai);
         }
 
-        // GET: tour_doan/Edit/5
+        // GET: tour_loai/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tour_doan tour_doan = db.tour_doan.Find(id);
-            if (tour_doan == null)
+            tour_loai tour_loai = db.tour_loai.Find(id);
+            if (tour_loai == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.tour_id = new SelectList(db.tours, "tour_id", "tour_ten", tour_doan.tour_id);
-            return View(tour_doan);
+            return View(tour_loai);
         }
 
-        // POST: tour_doan/Edit/5
+        // POST: tour_loai/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "doan_id,tour_id,doan_name,doan_ngaydi,doan_ngayve,doan_chitietchuongtrinh")] tour_doan tour_doan)
+        public ActionResult Edit([Bind(Include = "loai_id,loai_ten,loai_mota")] tour_loai tour_loai)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tour_doan).State = EntityState.Modified;
+                db.Entry(tour_loai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.tour_id = new SelectList(db.tours, "tour_id", "tour_ten", tour_doan.tour_id);
-            return View(tour_doan);
+            return View(tour_loai);
         }
 
-        // GET: tour_doan/Delete/5
+        // GET: tour_loai/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tour_doan tour_doan = db.tour_doan.Find(id);
-            if (tour_doan == null)
+            tour_loai tour_loai = db.tour_loai.Find(id);
+            if (tour_loai == null)
             {
                 return HttpNotFound();
             }
-            return View(tour_doan);
+            return View(tour_loai);
         }
 
-        // POST: tour_doan/Delete/5
+        // POST: tour_loai/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tour_doan tour_doan = db.tour_doan.Find(id);
-            db.tour_doan.Remove(tour_doan);
+            tour_loai tour_loai = db.tour_loai.Find(id);
+            db.tour_loai.Remove(tour_loai);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

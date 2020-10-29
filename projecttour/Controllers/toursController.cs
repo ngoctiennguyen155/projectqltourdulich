@@ -12,18 +12,28 @@ namespace projecttour.Controllers
 {
     public class toursController : Controller
     {
-        private tour_dulichEntities db = new tour_dulichEntities();
+        private tour_dulichEntities1 db = new tour_dulichEntities1();
 
         // GET: tours
         public ActionResult Index()
         {
-            var tours = db.tours.Include(t => t.tour_gia).Include(t => t.tour_loai);
+            var tours = db.tours.Include(t => t.tour_loai);
             return View(tours.ToList());
         }
 
         // GET: tours/Details/5
         public ActionResult Details(int? id)
         {
+            // load for dropdown dia diem
+            ViewBag.diadiem = db.tour_diadiem
+                                .Select(c => new SelectListItem { Value = c.dd_id.ToString(), Text = c.dd_ten + "-" + c.dd_thanhpho })
+                                .ToList();
+            // load data db.chitiet
+            ViewBag.cityoftour = (from ct in db.tour_chitiet
+                                 join dd in db.tour_diadiem
+                                 on ct.dd_id equals dd.dd_id
+                                 where ct.tour_id == id
+                                 select new SelectListItem { Value = dd.dd_ten, Text = dd.dd_thanhpho }).ToList() ;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -35,12 +45,32 @@ namespace projecttour.Controllers
             }
             return View(tour);
         }
+        [HttpPost]
+        public ActionResult Details(ICollection<string> listPlaces)
+        {
+            string[] array = new string[listPlaces.Count];
+            listPlaces.CopyTo(array, 0);
+            TempData["idplace"] = "<script>alert('"+ array[0] + "');</script>";
+            for (int i = 1; i < array.Length; i++)
+            {
+                tour_chitiet oneTour_chitiet = new tour_chitiet();
+                int generateIdTour_chitiet = (from id in db.tour_chitiet select id).Max(e => e.ct_id);
+                oneTour_chitiet.ct_id = generateIdTour_chitiet + 1;
+                oneTour_chitiet.tour_id = int.Parse(array[0]);
+                oneTour_chitiet.dd_id = int.Parse(array[i]);
+                //thutu?
+                oneTour_chitiet.ct_thutu = 1;
+                db.tour_chitiet.Add(oneTour_chitiet);
+                db.SaveChanges();
+            }
 
+            return RedirectToAction("Details");
+        }
         // GET: tours/Create
         public ActionResult Create()
         {
-            ViewBag.gia_id = new SelectList(db.tour_gia, "gia_id", "gia_id");
             ViewBag.loai_id = new SelectList(db.tour_loai, "loai_id", "loai_ten");
+            ViewBag.block = new List<SelectListItem>(){ new SelectListItem() {Text="0", Value="0"},new SelectListItem() { Text="1", Value="1"} };
             return View();
         }
 
@@ -49,16 +79,37 @@ namespace projecttour.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tour_id,tour_ten,tour_mota,loai_id,gia_id")] tour tour)
+        public ActionResult Create([Bind(Include = "tour_ten,tour_mota,loai_id,block")] tour tour,string[] cost)
         {
+            if (cost.Length>1)
+            {
+                
+                TempData["msg"] = "<script>alert('" + cost.Length+ "+" + cost[0] + "+" + cost[1] + "+" + cost[2] + "')</script>";
+            }
+            
+            int generateID = (from id in db.tours select id).Max(e => e.tour_id);
+            tour.tour_id = generateID + 1;
             if (ModelState.IsValid)
             {
                 db.tours.Add(tour);
                 db.SaveChanges();
+                /*start add cost for tour */
+                for(int i=1;i<=cost.Length/3;i++)
+                {
+                    tour_gia tourgia = new tour_gia();
+                    int generateIdgia = (from id in db.tour_gia select id).Max(e => e.gia_id);
+                    tourgia.gia_id = generateIdgia + 1;
+                    tourgia.tour_id = generateID + 1;
+                    tourgia.gia_tungay = DateTime.Parse(cost[(i * 3) - 3]);
+                    tourgia.gia_denngay = DateTime.Parse(cost[(i * 3) - 2]);
+                    tourgia.gia_sotien =  int.Parse(cost[(i * 3) - 1]);
+                    db.tour_gia.Add(tourgia);
+                    db.SaveChanges();
+                }
+                /*end*/
                 return RedirectToAction("Index");
             }
 
-            ViewBag.gia_id = new SelectList(db.tour_gia, "gia_id", "gia_id", tour.gia_id);
             ViewBag.loai_id = new SelectList(db.tour_loai, "loai_id", "loai_ten", tour.loai_id);
             return View(tour);
         }
@@ -75,7 +126,6 @@ namespace projecttour.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.gia_id = new SelectList(db.tour_gia, "gia_id", "gia_id", tour.gia_id);
             ViewBag.loai_id = new SelectList(db.tour_loai, "loai_id", "loai_ten", tour.loai_id);
             return View(tour);
         }
@@ -85,7 +135,7 @@ namespace projecttour.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tour_id,tour_ten,tour_mota,loai_id,gia_id")] tour tour)
+        public ActionResult Edit([Bind(Include = "tour_id,tour_ten,tour_mota,loai_id,block")] tour tour)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +143,6 @@ namespace projecttour.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.gia_id = new SelectList(db.tour_gia, "gia_id", "gia_id", tour.gia_id);
             ViewBag.loai_id = new SelectList(db.tour_loai, "loai_id", "loai_ten", tour.loai_id);
             return View(tour);
         }

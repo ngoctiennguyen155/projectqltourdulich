@@ -14,19 +14,11 @@ namespace projecttour.Models
     
     public partial class tour_chiphi
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tour_chiphi()
-        {
-            this.tour_loaichiphii = new HashSet<tour_loaichiphii>();
-        }
-    
         public int chiphi_id { get; set; }
         public int doan_id { get; set; }
         public Nullable<decimal> chiphi_total { get; set; }
         public string chiphi_chitiet { get; set; }
     
         public virtual tour_doan tour_doan { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tour_loaichiphii> tour_loaichiphii { get; set; }
     }
 }

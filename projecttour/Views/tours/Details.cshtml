@@ -7,45 +7,94 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>tour</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.tour_ten)
-        </dt>
+@Html.Raw(TempData["idplace"])
 
-        <dd>
-            @Html.DisplayFor(model => model.tour_ten)
-        </dd>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>tour</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.tour_ten)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tour_mota)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.tour_ten)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.tour_mota)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tour_mota)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tour_gia.gia_id)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.tour_mota)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.tour_gia.gia_id)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.block)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tour_loai.loai_ten)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.block)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.tour_loai.loai_ten)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tour_loai.loai_ten)
+                </dt>
 
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.tour_loai.loai_ten)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h4>Địa điểm</h4>
+
+
+            @* <label class="control-label col-md-3" for="loai_id">Địa điểm</label>*@
+        <div class="col-md-9">
+            <p>Current List</p>
+            <ul>
+                @foreach (var item in ViewBag.cityoftour)
+                {
+                    <li>@item.Value - @item.Text</li>
+                }
+            </ul>
+            <p>----</p>
+            @using (Html.BeginForm("Details", "tours", FormMethod.Post))
+            {
+                <input hidden type="text" value="" id="currentidtour" name="listPlaces"/>
+                <ul id="listdiadiem">
+                </ul>
+
+                <select class="form-control" id="dropdowndiadiem" name="diadiem">
+                    <option value="0" selected>Select a place</option>
+                    @foreach (var item in ViewBag.diadiem)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                <input id="addiadiem" type="button" value="Add" />
+                <input id="submitaddplace" type="submit" value="Update" />
+            }
+
+        </div>
+
+        </div>
+
+
+
+    </div>
+
 </div>
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.tour_id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/custom.js")
+}

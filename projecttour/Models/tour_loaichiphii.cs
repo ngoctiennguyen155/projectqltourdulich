@@ -17,8 +17,6 @@ namespace projecttour.Models
         public int cp_id { get; set; }
         public string cp_ten { get; set; }
         public string cp_mota { get; set; }
-        public int chiphi_id { get; set; }
-    
-        public virtual tour_chiphi tour_chiphi { get; set; }
+        public Nullable<int> cp_gia { get; set; }
     }
 }

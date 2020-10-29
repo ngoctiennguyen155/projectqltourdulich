@@ -130,7 +130,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\toursController.cs" />
+    <Compile Include="Controllers\tour_diadiemController.cs" />
     <Compile Include="Controllers\tour_doanController.cs" />
+    <Compile Include="Controllers\tour_khachhangController.cs" />
+    <Compile Include="Controllers\tour_loaichiphiiController.cs" />
+    <Compile Include="Controllers\tour_loaiController.cs" />
     <Compile Include="Controllers\tour_nhanvienController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -214,6 +218,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -243,16 +248,36 @@
     <Content Include="Views\tours\Details.cshtml" />
     <Content Include="Views\tours\Edit.cshtml" />
     <Content Include="Views\tours\Index.cshtml" />
-    <Content Include="Views\tour_doan\Create.cshtml" />
-    <Content Include="Views\tour_doan\Delete.cshtml" />
-    <Content Include="Views\tour_doan\Details.cshtml" />
-    <Content Include="Views\tour_doan\Edit.cshtml" />
-    <Content Include="Views\tour_doan\Index.cshtml" />
+    <Content Include="Views\tour_diadiem\Create.cshtml" />
+    <Content Include="Views\tour_diadiem\Delete.cshtml" />
+    <Content Include="Views\tour_diadiem\Details.cshtml" />
+    <Content Include="Views\tour_diadiem\Edit.cshtml" />
+    <Content Include="Views\tour_diadiem\Index.cshtml" />
+    <Content Include="Views\tour_loai\Create.cshtml" />
+    <Content Include="Views\tour_loai\Delete.cshtml" />
+    <Content Include="Views\tour_loai\Details.cshtml" />
+    <Content Include="Views\tour_loai\Edit.cshtml" />
+    <Content Include="Views\tour_loai\Index.cshtml" />
+    <Content Include="Views\tour_loaichiphii\Create.cshtml" />
+    <Content Include="Views\tour_loaichiphii\Delete.cshtml" />
+    <Content Include="Views\tour_loaichiphii\Details.cshtml" />
+    <Content Include="Views\tour_loaichiphii\Edit.cshtml" />
+    <Content Include="Views\tour_loaichiphii\Index.cshtml" />
     <Content Include="Views\tour_nhanvien\Create.cshtml" />
     <Content Include="Views\tour_nhanvien\Delete.cshtml" />
     <Content Include="Views\tour_nhanvien\Details.cshtml" />
     <Content Include="Views\tour_nhanvien\Edit.cshtml" />
     <Content Include="Views\tour_nhanvien\Index.cshtml" />
+    <Content Include="Views\tour_khachhang\Create.cshtml" />
+    <Content Include="Views\tour_khachhang\Delete.cshtml" />
+    <Content Include="Views\tour_khachhang\Details.cshtml" />
+    <Content Include="Views\tour_khachhang\Edit.cshtml" />
+    <Content Include="Views\tour_khachhang\Index.cshtml" />
+    <Content Include="Views\tour_doan\Create.cshtml" />
+    <Content Include="Views\tour_doan\Delete.cshtml" />
+    <Content Include="Views\tour_doan\Details.cshtml" />
+    <Content Include="Views\tour_doan\Edit.cshtml" />
+    <Content Include="Views\tour_doan\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

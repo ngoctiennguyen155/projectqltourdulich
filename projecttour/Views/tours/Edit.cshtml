@@ -43,10 +43,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.gia_id, "gia_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.block, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("gia_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.gia_id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.block, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.block, "", new { @class = "text-danger" })
             </div>
         </div>
 

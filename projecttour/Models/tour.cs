@@ -25,13 +25,12 @@ namespace projecttour.Models
         public string tour_ten { get; set; }
         public string tour_mota { get; set; }
         public int loai_id { get; set; }
-        public int gia_id { get; set; }
+        public string block { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tour_chitiet> tour_chitiet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tour_doan> tour_doan { get; set; }
-        public virtual tour_gia tour_gia { get; set; }
         public virtual tour_loai tour_loai { get; set; }
     }
 }

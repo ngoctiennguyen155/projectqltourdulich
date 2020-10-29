@@ -1,0 +1,43 @@
+﻿@model projecttour.Models.tour_diadiem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tour_diadiem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dd_thanhpho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dd_thanhpho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dd_ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dd_ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dd_mota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dd_mota)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.dd_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

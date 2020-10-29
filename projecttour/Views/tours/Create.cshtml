@@ -1,4 +1,4 @@
-﻿@model projecttour.Models.tour
+﻿@model projecttour.Models.tour 
 
 @{
     ViewBag.Title = "Create";
@@ -12,56 +12,75 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>tour</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-horizontal">
+    <h4>tour</h4>
+    <hr />
+    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.tour_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tour_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tour_id, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tour_ten, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.tour_ten, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.tour_ten, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.tour_ten, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tour_ten, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tour_ten, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tour_mota, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.tour_mota, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.tour_mota, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.loai_id, "Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("loai_id", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.loai_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.block, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.block, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownList("block", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.block, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ul id="myList">
+                    
+                </ul>
+                <p><label>Day Start</label><input type="date" id="daystart" /></p>
+                <p><label>Day End</label><input type="date" id="dayend" /></p>
+                <p><label>Cost</label><input type="number" id="cost" value="" /></p>
+
+                <input id="addcost" value="Add Cost" type="button" />
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.tour_mota, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tour_mota, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tour_mota, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.loai_id, "loai_id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("loai_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.loai_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.gia_id, "gia_id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("gia_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.gia_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="create" type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
+</div>
 }
 
 <div>
@@ -70,4 +89,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/custom.js")
 }

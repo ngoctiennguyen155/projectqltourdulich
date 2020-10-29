@@ -14,19 +14,10 @@ namespace projecttour.Models
     
     public partial class tour_gia
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tour_gia()
-        {
-            this.tours = new HashSet<tour>();
-        }
-    
         public int gia_id { get; set; }
         public Nullable<decimal> gia_sotien { get; set; }
-        public int tour_id { get; set; }
         public Nullable<System.DateTime> gia_tungay { get; set; }
         public Nullable<System.DateTime> gia_denngay { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tour> tours { get; set; }
+        public Nullable<int> tour_id { get; set; }
     }
 }
