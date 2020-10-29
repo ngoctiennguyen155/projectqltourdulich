@@ -1,0 +1,46 @@
+﻿@model IEnumerable<projecttour.Models.tour_nguoidi>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nguoidi_dsnhanvien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nguoidi_dskhachhang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tour_doan.doan_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nguoidi_dsnhanvien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nguoidi_dskhachhang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tour_doan.doan_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.nguoidi_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.nguoidi_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.nguoidi_id })
+        </td>
+    </tr>
+}
+
+</table>

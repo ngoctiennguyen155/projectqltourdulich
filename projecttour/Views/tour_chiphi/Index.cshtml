@@ -1,0 +1,46 @@
+﻿@model IEnumerable<projecttour.Models.tour_chiphi>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.chiphi_total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.chiphi_chitiet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tour_doan.doan_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.chiphi_total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.chiphi_chitiet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tour_doan.doan_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.chiphi_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.chiphi_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.chiphi_id })
+        </td>
+    </tr>
+}
+
+</table>

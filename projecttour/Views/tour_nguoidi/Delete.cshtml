@@ -1,0 +1,49 @@
+﻿@model projecttour.Models.tour_nguoidi
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tour_nguoidi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nguoidi_dsnhanvien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoidi_dsnhanvien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nguoidi_dskhachhang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoidi_dskhachhang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tour_doan.doan_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tour_doan.doan_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

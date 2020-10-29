@@ -21,11 +21,88 @@ namespace projecttour.Controllers
             var tour_doan = db.tour_doan.Include(t => t.tour);
             return View(tour_doan.ToList());
         }
-
+        class human
+        {
+            public string id { get; set; }
+            public string name { get; set; }
+        }
         // GET: tour_doan/Details/5
         public ActionResult Details(int? id)
         {
-            
+            //load data customers
+            ViewBag.customers = db.tour_khachhang
+                                .Select(c => new SelectListItem { Value = c.kh_id.ToString(), Text = c.kh_ten + "-" + c.kh_cmnd })
+                                .ToList();
+            //load data staffs
+            ViewBag.staffs = db.tour_nhanvien
+                                .Select(c => new SelectListItem { Value = c.nv_id.ToString(), Text = c.nv_ten + "-" + c.nv_cmnd })
+                                .ToList();
+            //load data loaichiphi
+            ViewBag.loaichiphis = db.tour_loaichiphii
+                                .Where(c=>c.cp_id!=0)
+                                .Select(c => new SelectListItem { Value = c.cp_id.ToString(), Text = c.cp_ten + "-" + c.cp_gia })
+                                .ToList();
+            // load data curren phi chi của đoàn
+            string chiphi = (from vnd in db.tour_chiphi
+                           where vnd.doan_id == id
+                           select vnd.chiphi_chitiet).First().ToString();
+            string[] chiphis = chiphi.Split(',');
+           
+            List<SelectListItem> listChiphiCurrent = new List<SelectListItem>();
+            for(int i = 0;i<chiphis.Length-1;i++)
+            {
+                                int idtatm = int.Parse(chiphis[i]);
+                string name = (from vnd in db.tour_loaichiphii
+                               where vnd.cp_id == idtatm
+                               select vnd.cp_ten).First().ToString();
+                string cost = (from vnd in db.tour_loaichiphii
+                               where vnd.cp_id == idtatm
+                               select vnd.cp_gia).First().ToString();
+                
+                listChiphiCurrent.Add(new SelectListItem{ Value = chiphis[i], Text = name+"-"+cost });
+            }
+            ViewBag.listchiphicurrent = listChiphiCurrent;
+            //chiphi end
+            //start load staffs current
+            string getstringstaff = (from vnd in db.tour_nguoidi
+                             where vnd.doan_id == id
+                             select vnd.nguoidi_dsnhanvien).First().ToString();
+            string[] liststaffs = getstringstaff.Split(',');
+            List<SelectListItem> listStaffCurrent = new List<SelectListItem>();
+            for (int i = 0; i < liststaffs.Length - 1; i++)
+            {
+                int idtatm = int.Parse(liststaffs[i]);
+                string name = (from vnd in db.tour_nhanvien
+                               where vnd.nv_id == idtatm
+                               select vnd.nv_ten).First().ToString();
+                string cmnd = (from vnd in db.tour_nhanvien
+                               where vnd.nv_id == idtatm
+                               select vnd.nv_cmnd).First().ToString();
+
+                listStaffCurrent.Add(new SelectListItem { Value = liststaffs[i], Text = name + "-" + cmnd });
+            }
+            ViewBag.listStaffCurrent = listStaffCurrent;
+            //end
+            //start load customers current
+            string getstringcustomer = (from vnd in db.tour_nguoidi
+                                     where vnd.doan_id == id
+                                     select vnd.nguoidi_dskhachhang).First().ToString();
+            string[] listcustomers = getstringcustomer.Split(',');
+            List<SelectListItem> listcustomerCurrent = new List<SelectListItem>();
+            for (int i = 0; i < listcustomers.Length - 1; i++)
+            {
+                int idtatm = int.Parse(listcustomers[i]);
+                string name = (from vnd in db.tour_khachhang
+                               where vnd.kh_id == idtatm
+                               select vnd.kh_ten).First().ToString();
+                string cmnd = (from vnd in db.tour_khachhang
+                               where vnd.kh_id == idtatm
+                               select vnd.kh_cmnd).First().ToString();
+
+                listcustomerCurrent.Add(new SelectListItem { Value = listcustomers[i], Text = name + "-" + cmnd });
+            }
+            ViewBag.listcustomerCurrent = listcustomerCurrent;
+            //end
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

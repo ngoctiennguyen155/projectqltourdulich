@@ -1,0 +1,43 @@
+﻿@model projecttour.Models.tour_nguoidi
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tour_nguoidi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nguoidi_dsnhanvien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoidi_dsnhanvien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nguoidi_dskhachhang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nguoidi_dskhachhang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tour_doan.doan_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tour_doan.doan_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.nguoidi_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

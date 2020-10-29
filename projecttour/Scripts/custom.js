@@ -60,4 +60,32 @@ $(document).ready(function () {
             return false;
         }
     });
+    //// detail doan khách
+    $("#addstaff").click(function () {
+        
+    
+        var iddiadiem = $("#dropdownstaffs option:selected").val();
+        var textdiadim = $("#dropdownstaffs option:selected").text();
+        if (iddiadiem != '0')
+            $("#liststaffs").append("<li>'" + iddiadiem + "-" + textdiadim + "'<input hidden type='text' value='" + iddiadiem + "' name='listPlaces'/></li>");
+        $("#dropdownstaffs").val("0");
+    });
+    $("#addcustomer").click(function () {
+
+
+        var iddiadiem = $("#dropdowncustomers option:selected").val();
+        var textdiadim = $("#dropdowncustomers option:selected").text();
+        if (iddiadiem != '0')
+            $("#listcustomers").append("<li>'" + iddiadiem + "-" + textdiadim + "'<input hidden type='text' value='" + iddiadiem + "' name='listPlaces'/></li>");
+        $("#dropdowncustomers").val("0");
+    });
+    $("#addloaichiphi").click(function () {
+
+
+        var iddiadiem = $("#dropdownloaichiphis option:selected").val();
+        var textdiadim = $("#dropdownloaichiphis option:selected").text();
+        if (iddiadiem != '0')
+            $("#listloaichiphis").append("<li>'" + iddiadiem + "-" + textdiadim + "'<input hidden type='text' value='" + iddiadiem + "' name='listPlaces'/></li>");
+        $("#dropdownloaichiphis").val("0");
+    });
 });

@@ -130,11 +130,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\toursController.cs" />
+    <Compile Include="Controllers\tour_chiphiController.cs" />
     <Compile Include="Controllers\tour_diadiemController.cs" />
     <Compile Include="Controllers\tour_doanController.cs" />
     <Compile Include="Controllers\tour_khachhangController.cs" />
     <Compile Include="Controllers\tour_loaichiphiiController.cs" />
     <Compile Include="Controllers\tour_loaiController.cs" />
+    <Compile Include="Controllers\tour_nguoidiController.cs" />
     <Compile Include="Controllers\tour_nhanvienController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -278,6 +280,16 @@
     <Content Include="Views\tour_doan\Details.cshtml" />
     <Content Include="Views\tour_doan\Edit.cshtml" />
     <Content Include="Views\tour_doan\Index.cshtml" />
+    <Content Include="Views\tour_nguoidi\Create.cshtml" />
+    <Content Include="Views\tour_nguoidi\Delete.cshtml" />
+    <Content Include="Views\tour_nguoidi\Details.cshtml" />
+    <Content Include="Views\tour_nguoidi\Edit.cshtml" />
+    <Content Include="Views\tour_nguoidi\Index.cshtml" />
+    <Content Include="Views\tour_chiphi\Create.cshtml" />
+    <Content Include="Views\tour_chiphi\Delete.cshtml" />
+    <Content Include="Views\tour_chiphi\Details.cshtml" />
+    <Content Include="Views\tour_chiphi\Edit.cshtml" />
+    <Content Include="Views\tour_chiphi\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

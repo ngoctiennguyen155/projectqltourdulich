@@ -20,5 +20,6 @@ namespace projecttour.Models
         public string nv_ngaysinh { get; set; }
         public string nv_email { get; set; }
         public string nv_nhiemvu { get; set; }
+        public string nv_cmnd { get; set; }
     }
 }

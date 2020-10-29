@@ -1,0 +1,43 @@
+﻿@model projecttour.Models.tour_chiphi
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tour_chiphi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.chiphi_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chiphi_total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chiphi_chitiet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chiphi_chitiet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tour_doan.doan_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tour_doan.doan_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.chiphi_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -100,6 +100,7 @@
           <Property Name="nv_ngaysinh" Type="nvarchar" MaxLength="50" />
           <Property Name="nv_email" Type="nvarchar" MaxLength="50" />
           <Property Name="nv_nhiemvu" Type="nvarchar" MaxLength="50" />
+          <Property Name="nv_cmnd" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tours">
           <Key>
@@ -328,6 +329,7 @@
           <Property Name="nv_ngaysinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="nv_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="nv_nhiemvu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nv_cmnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tour">
           <Key>
@@ -554,6 +556,7 @@
           <EntitySetMapping Name="tour_nhanvien">
             <EntityTypeMapping TypeName="tour_dulichModel.tour_nhanvien">
               <MappingFragment StoreEntitySet="tour_nhanvien">
+                <ScalarProperty Name="nv_cmnd" ColumnName="nv_cmnd" />
                 <ScalarProperty Name="nv_id" ColumnName="nv_id" />
                 <ScalarProperty Name="nv_ten" ColumnName="nv_ten" />
                 <ScalarProperty Name="nv_sdt" ColumnName="nv_sdt" />
