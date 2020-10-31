@@ -131,8 +131,28 @@ namespace projecttour.Controllers
         {
             if (ModelState.IsValid)
             {
+                int iddoan = tour_doan.doan_id;
                 db.tour_doan.Add(tour_doan);
                 db.SaveChanges();
+
+                tour_chiphi newTour_chiphi = new tour_chiphi();
+                int generateIdTour_chiphiId = (from id in db.tour_chiphi select id).Max(e => e.chiphi_id);
+                newTour_chiphi.chiphi_id = generateIdTour_chiphiId + 1;
+                newTour_chiphi.doan_id = iddoan;
+                newTour_chiphi.chiphi_chitiet = "";
+                db.tour_chiphi.Add(newTour_chiphi);
+                db.SaveChanges();
+
+                tour_nguoidi oneTour_nguoidi = new tour_nguoidi();
+                int generateIdTour_nguoidiId = (from id in db.tour_nguoidi select id).Max(e => e.nguoidi_id);
+                oneTour_nguoidi.nguoidi_id = generateIdTour_nguoidiId+1;
+                oneTour_nguoidi.doan_id = iddoan;
+                oneTour_nguoidi.nguoidi_dskhachhang = "";
+                oneTour_nguoidi.nguoidi_dsnhanvien = "";
+                db.tour_nguoidi.Add(oneTour_nguoidi);
+                db.SaveChanges();
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -194,6 +214,12 @@ namespace projecttour.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tour_doan tour_doan = db.tour_doan.Find(id);
+            tour_nguoidi tour_Nguoidi = db.tour_nguoidi.FirstOrDefault(e => e.doan_id == id);
+            db.tour_nguoidi.Remove(tour_Nguoidi);
+
+            tour_chiphi tour_Chiphi = db.tour_chiphi.FirstOrDefault(e => e.doan_id == id);
+            db.tour_chiphi.Remove(tour_Chiphi);
+
             db.tour_doan.Remove(tour_doan);
             db.SaveChanges();
             return RedirectToAction("Index");
