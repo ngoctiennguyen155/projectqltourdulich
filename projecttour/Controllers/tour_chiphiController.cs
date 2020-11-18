@@ -48,7 +48,7 @@ namespace projecttour.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "chiphi_id,doan_id,chiphi_total,chiphi_chitiet")] tour_chiphi tour_chiphi)
+        public ActionResult Create([Bind(Include = "chiphi_id,doan_id,chiphi_total,chiphi_chitiet,loaichiphi,hoadon,noidung,ngaylap")] tour_chiphi tour_chiphi)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace projecttour.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "chiphi_id,doan_id,chiphi_total,chiphi_chitiet")] tour_chiphi tour_chiphi)
+        public ActionResult Edit([Bind(Include = "chiphi_id,doan_id,chiphi_total,chiphi_chitiet,loaichiphi,hoadon,noidung,ngaylap")] tour_chiphi tour_chiphi)
         {
             if (ModelState.IsValid)
             {

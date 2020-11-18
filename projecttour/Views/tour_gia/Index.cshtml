@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom:20px">
+            @using (Html.BeginForm("Find", "tour_gia", FormMethod.Post)) {
+            <div style="margin-top:50px">
+                <p>@ViewBag.choose</p>
+                <label>Select Tour</label>
+                <select style="width:300px;height:30px;" name="selectedValue">
+                    @{
+                        if (ViewBag.choose == 0)
+                        {
+                            <option selected value="0">Select tour</option>
+                            
+                        }
+                        else
+                        {
+                            <option value="0">Select tour</option>
+                        }
+                        foreach (var item in ViewBag.tours)
+                        {
+                            if (ViewBag.choose == item.tour_id)
+                            {
+                                <option selected value="@item.tour_id">@item.tour_ten</option>
+                            }
+                            else
+                            {
+                                <option value="@item.tour_id">@item.tour_ten</option>
+                            }
+                        }
+                    }
+                </select>
+                <button style="height:30px">Xem</button>
+                <a style="border:1px solid;text-decoration:none;color:black;padding:7px 20px ; " href="/tour_gia/Create">Add cost</a>
+            </div>
+            }
+                
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <th>STT</th>
+                    <th>Cost</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th></th>
+                </tr>
+                @{ int i = 1;}
+                @foreach (var item in ViewBag.Costs)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.gia_sotien</td>
+                        <td>@item.gia_tungay.ToString(string.Format("dd/MM/yyyy"))</td>
+                        <td>@item.gia_denngay.ToString(string.Format("dd/MM/yyyy"))</td>
+                        <td><a href="/tour_gia/Edit/@item.gia_id">Edit</a></td>
+                        @{ i++;}
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -18,6 +18,10 @@ namespace projecttour.Models
         public int doan_id { get; set; }
         public Nullable<decimal> chiphi_total { get; set; }
         public string chiphi_chitiet { get; set; }
+        public Nullable<int> loaichiphi { get; set; }
+        public string hoadon { get; set; }
+        public string noidung { get; set; }
+        public Nullable<System.DateTime> ngaylap { get; set; }
     
         public virtual tour_doan tour_doan { get; set; }
     }

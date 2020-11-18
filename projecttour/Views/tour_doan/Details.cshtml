@@ -6,16 +6,13 @@
 }
 
 <h2>Details</h2>
-@foreach (var e in ViewBag.listchiphicurrent)
-{
-    <p>@e.Value</p>
-    <p>@e.Text</p>
-}
+
 <div class="container">
-    <h4>tour_doan</h4>
-    <hr />
+    
+    
     <div class="row">
         <div class="col-md-4">
+            <h4>tour_doan</h4>
             <dl class="dl-horizontal">
                 <dt>
                     @Html.DisplayNameFor(model => model.doan_name)
@@ -58,29 +55,7 @@
                 </dd>
 
             </dl>
-            <h4>Staffs</h4>
-            <p>Current List</p>
-            <ul>
-                @foreach (var e in ViewBag.listStaffCurrent)
-                {
-                    @*<p>@e.Value</p>
-            <p>@e.Text</p>*@
-                    <li>@e.Text</li>
-                }
-            </ul>
-            <p>----</p>
-            <ul id="liststaffs">
-                @*<li>123</li>*@
-                
-            </ul>
-            <select class="form-control" id="dropdownstaffs" name="diadiem">
-                <option value="0" selected>Select a staff</option>
-                @foreach (var item in ViewBag.staffs)
-                {
-                    <option value="@item.Value">@item.Text</option>
-                }
-            </select>
-            <input type="button" value="Add staff" id="addstaff" />
+
         </div>
         <div class="col-md-4">
             <h4>Customers</h4>
@@ -109,29 +84,29 @@
             <input type="button" value="Add customer" id="addcustomer" />
         </div>
         <div class="col-md-4">
-            <h4>Loại chi phí</h4>
+            <h4>Staffs</h4>
             <p>Current List</p>
             <ul>
-                @*<li>123</li>*@
-                @foreach (var e in ViewBag.listchiphicurrent)
+                @foreach (var e in ViewBag.listStaffCurrent)
                 {
                     @*<p>@e.Value</p>
-                    <p>@e.Text</p>*@
+                <p>@e.Text</p>*@
                     <li>@e.Text</li>
                 }
             </ul>
             <p>----</p>
-            <ul id="listloaichiphis">
-                <li>123</li>
+            <ul id="liststaffs">
+                @*<li>123</li>*@
+
             </ul>
-            <select class="form-control" id="dropdownloaichiphis" name="diadiem">
-                <option value="0" selected>Select a loaichiphi</option>
-                @foreach (var item in ViewBag.loaichiphis)
+            <select class="form-control" id="dropdownstaffs" name="diadiem">
+                <option value="0" selected>Select a staff</option>
+                @foreach (var item in ViewBag.staffs)
                 {
                     <option value="@item.Value">@item.Text</option>
                 }
             </select>
-            <input type="button" value="Add loaichiphi" id="addloaichiphi" />
+            <input type="button" value="Add staff" id="addstaff" />
         </div>
     </div>
 </div>
@@ -139,7 +114,7 @@
 
 
 </div>
-<input type="submit" value="Update three upon" id="submitdoan" />
+<input type="submit" value="Update" id="submitdoan" />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.doan_id }) |
     @Html.ActionLink("Back to List", "Index")

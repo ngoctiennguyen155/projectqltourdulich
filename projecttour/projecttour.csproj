@@ -133,6 +133,7 @@
     <Compile Include="Controllers\tour_chiphiController.cs" />
     <Compile Include="Controllers\tour_diadiemController.cs" />
     <Compile Include="Controllers\tour_doanController.cs" />
+    <Compile Include="Controllers\tour_giaController.cs" />
     <Compile Include="Controllers\tour_khachhangController.cs" />
     <Compile Include="Controllers\tour_loaichiphiiController.cs" />
     <Compile Include="Controllers\tour_loaiController.cs" />
@@ -285,6 +286,12 @@
     <Content Include="Views\tour_nguoidi\Details.cshtml" />
     <Content Include="Views\tour_nguoidi\Edit.cshtml" />
     <Content Include="Views\tour_nguoidi\Index.cshtml" />
+    <Content Include="Views\tour_gia\Create.cshtml" />
+    <Content Include="Views\tour_gia\Delete.cshtml" />
+    <Content Include="Views\tour_gia\Details.cshtml" />
+    <Content Include="Views\tour_gia\Edit.cshtml" />
+    <Content Include="Views\tour_gia\Index.cshtml" />
+    <Content Include="Views\tour_doan\Chiphi.cshtml" />
     <Content Include="Views\tour_chiphi\Create.cshtml" />
     <Content Include="Views\tour_chiphi\Delete.cshtml" />
     <Content Include="Views\tour_chiphi\Details.cshtml" />

@@ -4,9 +4,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Html.Raw(TempData["msg"])
 <h2>Index</h2>
-@TempData["msg"]
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -35,29 +34,30 @@
         <th>Options</th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.tour_id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.tour_ten)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.tour_mota)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.block)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.tour_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.tour_id })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tour_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tour_ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tour_mota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.block)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.tour_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.tour_id })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -17,8 +17,8 @@ namespace projecttour.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tour_doan()
         {
-            this.tour_chiphi = new HashSet<tour_chiphi>();
             this.tour_nguoidi = new HashSet<tour_nguoidi>();
+            this.tour_chiphi = new HashSet<tour_chiphi>();
         }
     
         public int doan_id { get; set; }
@@ -27,11 +27,12 @@ namespace projecttour.Models
         public Nullable<System.DateTime> doan_ngaydi { get; set; }
         public Nullable<System.DateTime> doan_ngayve { get; set; }
         public string doan_chitietchuongtrinh { get; set; }
+        public Nullable<int> id_gia_tour { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tour_chiphi> tour_chiphi { get; set; }
         public virtual tour tour { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tour_nguoidi> tour_nguoidi { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tour_chiphi> tour_chiphi { get; set; }
     }
 }

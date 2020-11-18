@@ -25,7 +25,6 @@ namespace projecttour.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tour_chiphi> tour_chiphi { get; set; }
         public virtual DbSet<tour_chitiet> tour_chitiet { get; set; }
         public virtual DbSet<tour_diadiem> tour_diadiem { get; set; }
         public virtual DbSet<tour_doan> tour_doan { get; set; }
@@ -36,5 +35,6 @@ namespace projecttour.Models
         public virtual DbSet<tour_nguoidi> tour_nguoidi { get; set; }
         public virtual DbSet<tour_nhanvien> tour_nhanvien { get; set; }
         public virtual DbSet<tour> tours { get; set; }
+        public virtual DbSet<tour_chiphi> tour_chiphi { get; set; }
     }
 }

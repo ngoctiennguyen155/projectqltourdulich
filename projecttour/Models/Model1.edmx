@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="tour_dulichModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'tour_dulich.dbo.chiphicustom' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="chiphicustom">
+          <Property Name="cp_id" Type="int" />
+          <Property Name="doan_id" Type="int" />
+          <Property Name="noidung" Type="nvarchar" MaxLength="50" />
+          <Property Name="sotien" Type="int" />
+          <Property Name="hoadon" Type="nvarchar" MaxLength="50" />
+          <Property Name="ngaylap" Type="date" />
+          <Property Name="loaicp" Type="int" />
+        </EntityType>-->
         <EntityType Name="tour_chiphi">
           <Key>
             <PropertyRef Name="chiphi_id" />
@@ -13,6 +24,10 @@
           <Property Name="doan_id" Type="int" Nullable="false" />
           <Property Name="chiphi_total" Type="decimal" Precision="18" Scale="0" />
           <Property Name="chiphi_chitiet" Type="nvarchar" MaxLength="50" />
+          <Property Name="loaichiphi" Type="int" />
+          <Property Name="hoadon" Type="nvarchar" MaxLength="50" />
+          <Property Name="noidung" Type="nvarchar" MaxLength="50" />
+          <Property Name="ngaylap" Type="date" />
         </EntityType>
         <EntityType Name="tour_chitiet">
           <Key>
@@ -42,6 +57,7 @@
           <Property Name="doan_ngaydi" Type="datetime" />
           <Property Name="doan_ngayve" Type="datetime" />
           <Property Name="doan_chitietchuongtrinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_gia_tour" Type="int" />
         </EntityType>
         <EntityType Name="tour_gia">
           <Key>
@@ -225,16 +241,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tour_dulichModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tour_chiphi">
-          <Key>
-            <PropertyRef Name="chiphi_id" />
-          </Key>
-          <Property Name="chiphi_id" Type="Int32" Nullable="false" />
-          <Property Name="doan_id" Type="Int32" Nullable="false" />
-          <Property Name="chiphi_total" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="chiphi_chitiet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tour_doan" Relationship="Self.FK_tour_chiphi_tour_doan" FromRole="tour_chiphi" ToRole="tour_doan" />
-        </EntityType>
         <EntityType Name="tour_chitiet">
           <Key>
             <PropertyRef Name="ct_id" />
@@ -266,9 +272,10 @@
           <Property Name="doan_ngaydi" Type="DateTime" Precision="3" />
           <Property Name="doan_ngayve" Type="DateTime" Precision="3" />
           <Property Name="doan_chitietchuongtrinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tour_chiphi" Relationship="Self.FK_tour_chiphi_tour_doan" FromRole="tour_doan" ToRole="tour_chiphi" />
           <NavigationProperty Name="tour" Relationship="Self.FK_tour_doan_tours" FromRole="tour_doan" ToRole="tours" />
           <NavigationProperty Name="tour_nguoidi" Relationship="Self.FK_tour_nguoidi_tour_doan" FromRole="tour_doan" ToRole="tour_nguoidi" />
+          <Property Name="id_gia_tour" Type="Int32" />
+          <NavigationProperty Name="tour_chiphi" Relationship="tour_dulichModel.FK_tour_chiphi_tour_doan" FromRole="tour_doan" ToRole="tour_chiphi" />
         </EntityType>
         <EntityType Name="tour_gia">
           <Key>
@@ -344,18 +351,6 @@
           <NavigationProperty Name="tour_doan" Relationship="Self.FK_tour_doan_tours" FromRole="tours" ToRole="tour_doan" />
           <NavigationProperty Name="tour_loai" Relationship="Self.FK_tours_tour_loai" FromRole="tours" ToRole="tour_loai" />
         </EntityType>
-        <Association Name="FK_tour_chiphi_tour_doan">
-          <End Role="tour_doan" Type="Self.tour_doan" Multiplicity="1" />
-          <End Role="tour_chiphi" Type="Self.tour_chiphi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tour_doan">
-              <PropertyRef Name="doan_id" />
-            </Principal>
-            <Dependent Role="tour_chiphi">
-              <PropertyRef Name="doan_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tour_chitiet_tour_diadiem">
           <End Role="tour_diadiem" Type="Self.tour_diadiem" Multiplicity="1" />
           <End Role="tour_chitiet" Type="Self.tour_chitiet" Multiplicity="*" />
@@ -417,7 +412,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="tour_dulichEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tour_chiphi" EntityType="Self.tour_chiphi" />
           <EntitySet Name="tour_chitiet" EntityType="Self.tour_chitiet" />
           <EntitySet Name="tour_diadiem" EntityType="Self.tour_diadiem" />
           <EntitySet Name="tour_doan" EntityType="Self.tour_doan" />
@@ -428,10 +422,6 @@
           <EntitySet Name="tour_nguoidi" EntityType="Self.tour_nguoidi" />
           <EntitySet Name="tour_nhanvien" EntityType="Self.tour_nhanvien" />
           <EntitySet Name="tours" EntityType="Self.tour" />
-          <AssociationSet Name="FK_tour_chiphi_tour_doan" Association="Self.FK_tour_chiphi_tour_doan">
-            <End Role="tour_doan" EntitySet="tour_doan" />
-            <End Role="tour_chiphi" EntitySet="tour_chiphi" />
-          </AssociationSet>
           <AssociationSet Name="FK_tour_chitiet_tour_diadiem" Association="Self.FK_tour_chitiet_tour_diadiem">
             <End Role="tour_diadiem" EntitySet="tour_diadiem" />
             <End Role="tour_chitiet" EntitySet="tour_chitiet" />
@@ -452,23 +442,44 @@
             <End Role="tour_loai" EntitySet="tour_loai" />
             <End Role="tours" EntitySet="tours" />
           </AssociationSet>
+          <EntitySet Name="tour_chiphi" EntityType="tour_dulichModel.tour_chiphi" />
+          <AssociationSet Name="FK_tour_chiphi_tour_doan" Association="tour_dulichModel.FK_tour_chiphi_tour_doan">
+            <End Role="tour_doan" EntitySet="tour_doan" />
+            <End Role="tour_chiphi" EntitySet="tour_chiphi" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tour_chiphi">
+          <Key>
+            <PropertyRef Name="chiphi_id" />
+          </Key>
+          <Property Name="chiphi_id" Type="Int32" Nullable="false" />
+          <Property Name="doan_id" Type="Int32" Nullable="false" />
+          <Property Name="chiphi_total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="chiphi_chitiet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tour_doan" Relationship="tour_dulichModel.FK_tour_chiphi_tour_doan" FromRole="tour_chiphi" ToRole="tour_doan" />
+          <Property Name="loaichiphi" Type="Int32" />
+          <Property Name="hoadon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="noidung" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngaylap" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_tour_chiphi_tour_doan">
+          <End Type="tour_dulichModel.tour_doan" Role="tour_doan" Multiplicity="1" />
+          <End Type="tour_dulichModel.tour_chiphi" Role="tour_chiphi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour_doan">
+              <PropertyRef Name="doan_id" />
+            </Principal>
+            <Dependent Role="tour_chiphi">
+              <PropertyRef Name="doan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="tour_dulichModelStoreContainer" CdmEntityContainer="tour_dulichEntities1">
-          <EntitySetMapping Name="tour_chiphi">
-            <EntityTypeMapping TypeName="tour_dulichModel.tour_chiphi">
-              <MappingFragment StoreEntitySet="tour_chiphi">
-                <ScalarProperty Name="chiphi_id" ColumnName="chiphi_id" />
-                <ScalarProperty Name="doan_id" ColumnName="doan_id" />
-                <ScalarProperty Name="chiphi_total" ColumnName="chiphi_total" />
-                <ScalarProperty Name="chiphi_chitiet" ColumnName="chiphi_chitiet" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tour_chitiet">
             <EntityTypeMapping TypeName="tour_dulichModel.tour_chitiet">
               <MappingFragment StoreEntitySet="tour_chitiet">
@@ -492,6 +503,7 @@
           <EntitySetMapping Name="tour_doan">
             <EntityTypeMapping TypeName="tour_dulichModel.tour_doan">
               <MappingFragment StoreEntitySet="tour_doan">
+                <ScalarProperty Name="id_gia_tour" ColumnName="id_gia_tour" />
                 <ScalarProperty Name="doan_id" ColumnName="doan_id" />
                 <ScalarProperty Name="tour_id" ColumnName="tour_id" />
                 <ScalarProperty Name="doan_name" ColumnName="doan_name" />
@@ -574,6 +586,20 @@
                 <ScalarProperty Name="tour_mota" ColumnName="tour_mota" />
                 <ScalarProperty Name="loai_id" ColumnName="loai_id" />
                 <ScalarProperty Name="block" ColumnName="block" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tour_chiphi">
+            <EntityTypeMapping TypeName="tour_dulichModel.tour_chiphi">
+              <MappingFragment StoreEntitySet="tour_chiphi">
+                <ScalarProperty Name="ngaylap" ColumnName="ngaylap" />
+                <ScalarProperty Name="noidung" ColumnName="noidung" />
+                <ScalarProperty Name="hoadon" ColumnName="hoadon" />
+                <ScalarProperty Name="loaichiphi" ColumnName="loaichiphi" />
+                <ScalarProperty Name="chiphi_chitiet" ColumnName="chiphi_chitiet" />
+                <ScalarProperty Name="chiphi_total" ColumnName="chiphi_total" />
+                <ScalarProperty Name="doan_id" ColumnName="doan_id" />
+                <ScalarProperty Name="chiphi_id" ColumnName="chiphi_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

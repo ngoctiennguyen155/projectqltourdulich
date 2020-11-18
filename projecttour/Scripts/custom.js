@@ -28,7 +28,7 @@ $(document).ready(function () {
         $("#myList").append("<li><input type='date' value='" + daystart + "' name='cost'/><input type='date' value='" + dayend + "' name='cost'/><input type='number' value='"+cost+"' name='cost'/>From " + daystart + " to " + dayend + " with cost: " + cost + "</li>");
        
     });
-    $('#create').click(function () {
+  /*  $('#create').click(function () {
 
         // Get the Login Name value and trim it
         var name = $("#myList").children();
@@ -37,7 +37,7 @@ $(document).ready(function () {
             alert("[error] Cost isn't added.");
             return false;
         }
-    });
+    });*/
 
     //diadiem
     $("#addiadiem").click(function () {

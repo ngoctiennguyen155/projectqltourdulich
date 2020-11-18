@@ -6,7 +6,7 @@
 }
 
 <h2>Index</h2>
-
+@Html.Raw(TempData["msg"])
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -27,32 +27,54 @@
         <th>
             @Html.DisplayNameFor(model => model.tour.tour_ten)
         </th>
+        <th>Cost</th>
+        <th>Chi phi</th>
         <th></th>
     </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.doan_name)
+    </td>
+    <td>
+        @{
+            var x = item.doan_ngaydi.ToString();
+            var t = x.Split(' ');
+            var z = t[0].Split('/');
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.doan_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.doan_ngaydi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.doan_ngayve)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.doan_chitietchuongtrinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tour.tour_ten)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.doan_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.doan_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.doan_id })
-        </td>
-    </tr>
-}
+        }
+        @z[1]/@z[0]/@z[2]
+    </td>
+    <td>
+        @{
+            var xx = item.doan_ngayve.ToString();
+            var tt = xx.Split(' ');
+            var zz = tt[0].Split('/');
+
+        }
+        @zz[1]/@zz[0]/@zz[2]
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.doan_chitietchuongtrinh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tour.tour_ten)
+    </td>
+    <td>
+        @ViewBag.CostList[i]
+        @{ i++;}
+    </td>
+    <td>
+        @Html.ActionLink("chi tiet", "Chiphi", new { id = item.doan_id })
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.doan_id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.doan_id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.doan_id })
+    </td>
+</tr>
+    }
 
 </table>

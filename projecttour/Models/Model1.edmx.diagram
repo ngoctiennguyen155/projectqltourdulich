@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0b911959a1cc4fc290deb5e4361f72ef" Name="Diagram1">
-        <EntityTypeShape EntityType="tour_dulichModel.tour_chiphi" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour_chitiet" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour_diadiem" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour_doan" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour_gia" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+      <Diagram DiagramId="0b911959a1cc4fc290deb5e4361f72ef" Name="Diagram1" ZoomLevel="60">
+        <EntityTypeShape EntityType="tour_dulichModel.tour_chitiet" Width="1.5" PointX="5.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour_diadiem" Width="1.5" PointX="5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour_doan" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour_gia" Width="1.5" PointX="7.625" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="tour_dulichModel.tour_khachhang" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour_loai" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour_loai" Width="1.5" PointX="0.625" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="tour_dulichModel.tour_loaichiphii" Width="1.5" PointX="9.875" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour_nguoidi" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour_nhanvien" Width="1.5" PointX="9.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_dulichModel.tour" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <AssociationConnector Association="tour_dulichModel.FK_tour_chiphi_tour_doan" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour_nguoidi" Width="1.5" PointX="9" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour_nhanvien" Width="1.5" PointX="10.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour" Width="1.5" PointX="2.625" PointY="3.875" IsExpanded="true" />
         <AssociationConnector Association="tour_dulichModel.FK_tour_chitiet_tour_diadiem" ManuallyRouted="false" />
         <AssociationConnector Association="tour_dulichModel.FK_tour_chitiet_tours" ManuallyRouted="false" />
         <AssociationConnector Association="tour_dulichModel.FK_tour_doan_tours" ManuallyRouted="false" />
         <AssociationConnector Association="tour_dulichModel.FK_tour_nguoidi_tour_doan" ManuallyRouted="false" />
         <AssociationConnector Association="tour_dulichModel.FK_tours_tour_loai" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="tour_dulichModel.tour_chiphi" Width="1.5" PointX="6.625" PointY="7.75" />
+        <AssociationConnector Association="tour_dulichModel.FK_tour_chiphi_tour_doan" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
