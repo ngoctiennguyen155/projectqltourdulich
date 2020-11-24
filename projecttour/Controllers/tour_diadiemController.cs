@@ -46,10 +46,13 @@ namespace projecttour.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dd_id,dd_thanhpho,dd_ten,dd_mota")] tour_diadiem tour_diadiem)
+        public ActionResult Create([Bind(Include = "dd_thanhpho,dd_ten,dd_mota")] tour_diadiem tour_diadiem)
         {
             if (ModelState.IsValid)
             {
+                int generateId = 0;
+                if (db.tour_diadiem.ToList().Count > 0) generateId = (from id in db.tour_khachhang select id).Max(e => e.kh_id);
+                tour_diadiem.dd_id = generateId + 1;
                 db.tour_diadiem.Add(tour_diadiem);
                 db.SaveChanges();
                 return RedirectToAction("Index");

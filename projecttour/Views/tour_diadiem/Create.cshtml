@@ -15,17 +15,17 @@
     <div class="form-horizontal">
         <h4>tour_diadiem</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+ @*       @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.dd_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.dd_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.dd_id, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dd_thanhpho, htmlAttributes: new { @class = "control-label col-md-2" })
+           <label class="control-label col-md-2">Tên thành phố</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.dd_thanhpho, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.dd_thanhpho, "", new { @class = "text-danger" })
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dd_ten, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Địa điểm</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.dd_ten, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.dd_ten, "", new { @class = "text-danger" })
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dd_mota, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Mô tả</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.dd_mota, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.dd_mota, "", new { @class = "text-danger" })

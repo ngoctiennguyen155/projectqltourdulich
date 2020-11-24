@@ -46,10 +46,13 @@ namespace projecttour.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "loai_id,loai_ten,loai_mota")] tour_loai tour_loai)
+        public ActionResult Create([Bind(Include = "loai_ten,loai_mota")] tour_loai tour_loai)
         {
             if (ModelState.IsValid)
             {
+                int generateId = 0;
+                if (db.tour_loai.ToList().Count > 0) generateId = (from id in db.tour_loai select id).Max(e => e.loai_id);
+                tour_loai.loai_id = generateId + 1;
                 db.tour_loai.Add(tour_loai);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<projecttour.Controllers.tour_nguoidiController.thongke>
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom:20px">
+            @using (Html.BeginForm("Chitiet", "tour_nguoidi", FormMethod.Post))
+            {
+                <div style="margin-top:50px">
+                    <p>ViewBag.choose</p>
+                    <label>Select Tour</label>
+                    <select style="width:300px;height:30px;" name="selectedValue">
+
+                        <option selected value="0">Select tour</option>
+                        @{
+                            foreach (var e in ViewBag.listTour)
+                            {
+                                <option selected value="@e.tour_id">@e.tour_ten</option>
+                            }
+                        }
+
+                    </select>
+                    <button style="height:30px">Xem</button>
+
+                </div>
+            }
+
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <tr>
+                    <th>#</th>
+                    <th>Đoàn đi</th>
+                    <th>Số khách</th>
+                    <th>Giá tour</th>
+                    <th>Doanh thu</th>
+                    <th>Tổng chi phí</th>
+                    <th>Lãi</th>
+                </tr>
+                @{
+                    int i = 1;
+                    int tdt = 0;
+                    int tcp = 0;
+                    foreach (var e in Model)
+                    {
+                        int zz = e.tongdanhthu - e.tongchiphi;
+                        tdt += e.tongdanhthu;
+                        tcp += e.tongchiphi;
+                        <tr>
+                            <td>@i</td>
+                            <td>@e.tour</td>
+                            <td>@e.sokhach</td>
+                            <td>@e.giatour</td>
+                            <td>@e.tongdanhthu | <a href="https://localhost:44341/tour_doan/Details/@e.idtour" >Chi tiết</a></td>
+                            <td>@e.tongchiphi | <a href="https://localhost:44341/tour_doan/Chiphi/@e.idtour">Chi tiết</a></td>
+                            <td>@zz</td>
+
+                        </tr>
+                        i = i + 1;
+                    }
+                    int lai = tdt - tcp;
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Tổng</td>
+                    <td>@tdt</td>
+                    <td>@tcp</td>
+                    <td>@lai</td>
+
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

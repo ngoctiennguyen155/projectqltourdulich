@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            ID
+            #
             @*@Html.DisplayNameFor(model => model.tour_ten)*@
         </th>
         <th>
@@ -30,6 +30,9 @@
         <th>
             Type
             @*@Html.DisplayNameFor(model => model.tour_loai.loai_ten)*@
+        </th>
+        <th>
+            Cost
         </th>
         <th>Options</th>
     </tr>
@@ -52,6 +55,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
             </td>
+            <td><a href="/tour_gia?tour=@item.tour_id">View</a></td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.tour_id }) |

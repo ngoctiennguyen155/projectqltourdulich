@@ -81,7 +81,8 @@ namespace projecttour.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "gia_sotien,gia_tungay,gia_denngay,tour_id")] tour_gia tour_gia)
         {
-            int generateID = (from id in db.tour_gia select id).Max(e => e.gia_id);
+            int generateID = 0;
+            if(db.tour_gia.ToList().Count>0) generateID = (from id in db.tour_gia select id).Max(e => e.gia_id);
             tour_gia.gia_id = generateID + 1;
             if (ModelState.IsValid)
             {

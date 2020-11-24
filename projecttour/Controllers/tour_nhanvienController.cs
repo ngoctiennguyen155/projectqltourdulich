@@ -46,10 +46,13 @@ namespace projecttour.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "nv_id,nv_ten,nv_sdt,nv_ngaysinh,nv_email,nv_nhiemvu")] tour_nhanvien tour_nhanvien)
+        public ActionResult Create([Bind(Include = "nv_ten,nv_sdt,nv_ngaysinh,nv_email,nv_nhiemvu")] tour_nhanvien tour_nhanvien)
         {
             if (ModelState.IsValid)
             {
+                int generateId = 0;
+                if (db.tour_nhanvien.ToList().Count > 0) generateId = (from id in db.tour_nhanvien select id).Max(e => e.nv_id);
+                tour_nhanvien.nv_id = generateId + 1;
                 db.tour_nhanvien.Add(tour_nhanvien);
                 db.SaveChanges();
                 return RedirectToAction("Index");

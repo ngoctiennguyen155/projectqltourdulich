@@ -89,9 +89,11 @@ namespace projecttour.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "tour_ten,tour_mota,loai_id,block")] tour tour, ICollection<string> listPlaces)
         {
-            
-            
-            int generateID = (from id in db.tours select id).Max(e => e.tour_id);
+
+
+            int generateID = 0;
+            if(db.tours.ToList().Count > 0)
+                generateID = (from id in db.tours select id).Max(e => e.tour_id);
             tour.tour_id = generateID + 1;
             if (ModelState.IsValid)
             {

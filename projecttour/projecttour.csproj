@@ -284,7 +284,7 @@
     <Content Include="Views\tour_nguoidi\Create.cshtml" />
     <Content Include="Views\tour_nguoidi\Delete.cshtml" />
     <Content Include="Views\tour_nguoidi\Details.cshtml" />
-    <Content Include="Views\tour_nguoidi\Edit.cshtml" />
+    <Content Include="Views\tour_nguoidi\Chitiet.cshtml" />
     <Content Include="Views\tour_nguoidi\Index.cshtml" />
     <Content Include="Views\tour_gia\Create.cshtml" />
     <Content Include="Views\tour_gia\Delete.cshtml" />

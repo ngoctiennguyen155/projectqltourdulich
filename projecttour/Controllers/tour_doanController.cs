@@ -62,13 +62,16 @@ namespace projecttour.Controllers
             int result = 0;
             tour_Chiphis.ForEach(e =>
             {
-                int tt = int.Parse(e.chiphi_total.ToString());
-                result += tt;
-                int zz = (int)e.loaichiphi;
-                string z = (from vnd in db.tour_loaichiphii
-                            where vnd.cp_id == zz
-                            select vnd.cp_ten).First().ToString();
-                tam.Add(z);
+                if (tour_Chiphis.Count > 0)
+                {
+                    int tt = int.Parse(e.chiphi_total.ToString());
+                    result += tt;
+                    int zz = (int)e.loaichiphi;
+                    string z = (from vnd in db.tour_loaichiphii
+                                where vnd.cp_id == zz
+                                select vnd.cp_ten).First().ToString();
+                    tam.Add(z);
+                }
             });
             ViewBag.namechiphi = tam;
             ViewBag.total = result;
@@ -88,7 +91,8 @@ namespace projecttour.Controllers
             int sotien = int.Parse(Request["sotien"]);
 
             tour_chiphi z = new tour_chiphi();
-            int generateId= (from id in db.tour_chiphi select id).Max(e => e.chiphi_id);
+            int generateId = 0;
+            if(db.tour_chiphi.ToList().Count>0) generateId = (from id in db.tour_chiphi select id).Max(e => e.chiphi_id);
             z.chiphi_id = generateId + 1;
             z.doan_id = idDoan;
             z.chiphi_total = sotien;
@@ -188,33 +192,15 @@ namespace projecttour.Controllers
             int zzz = db.tour_gia.Where(a => a.gia_sotien == stsb && a.tour_id== tour_doan.tour_id)
                      .Select(a => a.gia_id)
                      .First();
-            TempData["msg"] = "<script>alert('" + zzz + "');</script>";
             if (ModelState.IsValid)
             {
                 int generateIdTour_doan = 0;
+                if(db.tour_doan.ToList().Count>0)
                 generateIdTour_doan = (from id in db.tour_doan select id).Max(e => e.doan_id);
-                if (generateIdTour_doan == null) generateIdTour_doan = 0;
                 int iddoan = generateIdTour_doan + 1;
                 tour_doan.doan_id = iddoan;
                 tour_doan.id_gia_tour = zzz;
                 db.tour_doan.Add(tour_doan);
-                db.SaveChanges();
-                tour_chiphi newTour_chiphi = new tour_chiphi();
-                int generateIdTour_chiphiId = (from id in db.tour_chiphi select id).Max(e => e.chiphi_id);
-                newTour_chiphi.chiphi_id = generateIdTour_chiphiId + 1;
-                newTour_chiphi.doan_id = iddoan;
-                newTour_chiphi.chiphi_chitiet = "";
-                db.tour_chiphi.Add(newTour_chiphi);
-                db.SaveChanges();
-
-                tour_nguoidi oneTour_nguoidi = new tour_nguoidi();
-                int generateIdTour_nguoidiId = (from id in db.tour_nguoidi select id).Max(e => e.nguoidi_id);
-                oneTour_nguoidi.nguoidi_id = generateIdTour_nguoidiId+1;
-                oneTour_nguoidi.doan_id = iddoan;
-                oneTour_nguoidi.nguoidi_dskhachhang = "";
-                oneTour_nguoidi.nguoidi_dsnhanvien = "";
-                db.tour_nguoidi.Add(oneTour_nguoidi);
-                db.SaveChanges();
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

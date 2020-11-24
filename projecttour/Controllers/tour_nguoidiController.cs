@@ -15,54 +15,63 @@ namespace projecttour.Controllers
         private tour_dulichEntities1 db = new tour_dulichEntities1();
 
         // GET: tour_nguoidi
+        public class thongke
+        {
+            public int idtour { get; set; }
+            public string tour { get; set; }
+            public int tongdoandi { get; set; }
+            public int tongdanhthu { get; set; }
+            public int tongchiphi { get; set; }
+            public int lai { get; set; }
+            public int sokhach { get; set; }
+            public int giatour { get; set; }
+        }
         public ActionResult Index()
         {
             var tour_nguoidi = db.tour_nguoidi.Include(t => t.tour_doan);
-            return View(tour_nguoidi.ToList());
-        }
-
-        // GET: tour_nguoidi/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            List<thongke> listtk = new List<thongke>();
+            List<int> ttt = new List<int>();
+            var tourlist = db.tours.ToList();
+            tourlist.ForEach(e =>
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tour_nguoidi tour_nguoidi = db.tour_nguoidi.Find(id);
-            if (tour_nguoidi == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tour_nguoidi);
+                thongke tk = new thongke();
+                tk.idtour = e.tour_id;
+                tk.tour = e.tour_ten;
+                
+                tk.tongdoandi = db.tour_doan.Count(element => element.tour_id==e.tour_id );
+
+                int tdt = 0;
+                int tcp = 0;
+                // tong chi phi = doan gia * so nguoi di
+                db.tour_doan.Where(ee => ee.tour_id == e.tour_id).ToList().ForEach(z =>
+                 {
+                     // tong nguoi di * gia -> doanh thu
+                     string giadoan = db.tour_gia.First(zz => zz.gia_id == z.id_gia_tour).gia_sotien.ToString();
+                     int nguoidi = db.tour_nguoidi.Where(zz => zz.doan_id == z.doan_id).Count();
+                     
+                     tdt += nguoidi * int.Parse(giadoan);
+
+                     //all chi phi total
+                     db.tour_chiphi.Where(zz => zz.doan_id == z.doan_id).ToList().ForEach(zzz =>
+                     {
+                         string ztamz = db.tour_chiphi.First(zzzz => zzzz.chiphi_id == zzz.chiphi_id).chiphi_total.ToString();
+                         tcp += int.Parse(ztamz);
+                     });
+                     
+                 });
+                tk.tongchiphi = tcp;
+                tk.tongdanhthu = tdt;
+                
+                listtk.Add(tk);
+                //
+            });
+            ViewBag.listCost = listtk.ToList();
+            return View(listtk.ToList());
         }
 
-        // GET: tour_nguoidi/Create
-        public ActionResult Create()
-        {
-            ViewBag.doan_id = new SelectList(db.tour_doan, "doan_id", "doan_name");
-            return View();
-        }
-
-        // POST: tour_nguoidi/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "nguoidi_id,doan_id,nguoidi_dsnhanvien,nguoidi_dskhachhang")] tour_nguoidi tour_nguoidi)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tour_nguoidi.Add(tour_nguoidi);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.doan_id = new SelectList(db.tour_doan, "doan_id", "doan_name", tour_nguoidi.doan_id);
-            return View(tour_nguoidi);
-        }
 
         // GET: tour_nguoidi/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Chitiet(int? id)
         {
             if (id == null)
             {
@@ -73,60 +82,38 @@ namespace projecttour.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.doan_id = new SelectList(db.tour_doan, "doan_id", "doan_name", tour_nguoidi.doan_id);
-            return View(tour_nguoidi);
+            List<thongke> listtk = new List<thongke>();
+            
+            ViewBag.listTour = db.tours.ToList();
+            db.tour_doan.Where(ee => ee.tour_id == id).ToList().ForEach(z =>
+            {
+                // tong nguoi di * gia -> doanh thu
+                thongke tKe = new thongke();
+                tKe.idtour = z.doan_id;
+                tKe.tour = z.doan_name;
+                string giadoan = db.tour_gia.First(zz => zz.gia_id == z.id_gia_tour).gia_sotien.ToString();
+                int nguoidi = db.tour_nguoidi.Where(zz => zz.doan_id == z.doan_id).Count();
+                tKe.sokhach = nguoidi;
+                tKe.giatour = int.Parse(giadoan);
+                tKe.tongdanhthu = nguoidi * int.Parse(giadoan);
+                //all chi phi total
+                int tcp = 0;
+                db.tour_chiphi.Where(zz => zz.doan_id == z.doan_id).ToList().ForEach(zzz =>
+                {
+                    string ztamz = db.tour_chiphi.First(zzzz => zzzz.chiphi_id == zzz.chiphi_id).chiphi_total.ToString();
+                    tcp += int.Parse(ztamz);
+                });
+                tKe.tongchiphi = tcp;
+                listtk.Add(tKe);
+            });
+            return View(listtk.ToList());
         }
-
-        // POST: tour_nguoidi/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "nguoidi_id,doan_id,nguoidi_dsnhanvien,nguoidi_dskhachhang")] tour_nguoidi tour_nguoidi)
+        public ActionResult Chitiet()
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tour_nguoidi).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.doan_id = new SelectList(db.tour_doan, "doan_id", "doan_name", tour_nguoidi.doan_id);
-            return View(tour_nguoidi);
+            string id = HttpContext.Request.Form["selectedValue"];
+            return Redirect("https://localhost:44341/tour_nguoidi/Chitiet/" + id);
         }
 
-        // GET: tour_nguoidi/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tour_nguoidi tour_nguoidi = db.tour_nguoidi.Find(id);
-            if (tour_nguoidi == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tour_nguoidi);
-        }
-
-        // POST: tour_nguoidi/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tour_nguoidi tour_nguoidi = db.tour_nguoidi.Find(id);
-            db.tour_nguoidi.Remove(tour_nguoidi);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

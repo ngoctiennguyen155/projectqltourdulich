@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.tour_ten, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-md-2">Name</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.tour_ten, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.tour_ten, "", new { @class = "text-danger" })
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.tour_mota, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-md-2">Description</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.tour_mota, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.tour_mota, "", new { @class = "text-danger" })
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.loai_id, "Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-md-2">Type</label>
                     <div class="col-md-10">
                         @Html.DropDownList("loai_id", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.loai_id, "", new { @class = "text-danger" })
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.block, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-md-2">Block</label>
                     <div class="col-md-10">
                         @*@Html.EditorFor(model => model.block, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.DropDownList("block", null, htmlAttributes: new { @class = "form-control" })
@@ -59,35 +59,35 @@
                     </div>
                 </div>
             </div>
+           
             <div class="col-md-6">
-                @*<ul id="myList">
+             
+                <h4>List Places</h4>
 
-        </ul>
-        <p><label>Day Start</label><input type="date" id="daystart" /></p>
-        <p><label>Day End</label><input type="date" id="dayend" /></p>
-        <p><label>Cost</label><input type="number" id="cost" value="" /></p>
-
-        <input id="addcost" value="Add Cost" type="button" />*@
-
-                <p>Current List</p>
-                <ul>
-                    
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="name">Lalalalaiaia</span>
+                        <label class="btn btn-default btn-xs pull-right remove-item">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </label>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="name">Panananannaeue</span>
+                        <label class="btn btn-default btn-xs pull-right remove-item">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </label>
+                    </li>
                 </ul>
-                <p>----</p>
-                
-                    <input hidden type="text" value="" id="currentidtour" name="listPlaces" />
-                    <ul id="listdiadiem">
-                    </ul>
 
-                    <select class="form-control" id="dropdowndiadiem" name="diadiem">
-                        <option value="0" selected>Select a place</option>
-                        @foreach (var item in ViewBag.diadiem)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                    <input id="addiadiem" type="button" value="Add" />
-                
+                <select class="form-control" id="dropdowndiadiem" name="diadiem">
+                    <option value="0" selected>Select a place</option>
+                    @foreach (var item in ViewBag.diadiem)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                <input id="addiadiem" type="button" value="Add" />
+
             </div>
         </div>
 
@@ -109,5 +109,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/custom.js")
+<script>
+    $(document).ready(() => {
+
+    });
+</script>
 }
