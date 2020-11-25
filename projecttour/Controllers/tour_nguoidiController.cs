@@ -47,7 +47,7 @@ namespace projecttour.Controllers
                  {
                      // tong nguoi di * gia -> doanh thu
                      string giadoan = db.tour_gia.First(zz => zz.gia_id == z.id_gia_tour).gia_sotien.ToString();
-                     int nguoidi = db.tour_nguoidi.Where(zz => zz.doan_id == z.doan_id).Count();
+                     int nguoidi = db.tour_nguoidi.Where(zz => zz.doan_id == z.doan_id && zz.nguoidi_dsnhanvien=="0").Count();
                      
                      tdt += nguoidi * int.Parse(giadoan);
 
