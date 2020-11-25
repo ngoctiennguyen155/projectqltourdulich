@@ -120,24 +120,7 @@ namespace projecttour.Controllers
            
            
             //start load staffs current
-            string getstringstaff = (from vnd in db.tour_nguoidi
-                             where vnd.doan_id == id
-                             select vnd.nguoidi_dsnhanvien).First().ToString();
-            string[] liststaffs = getstringstaff.Split(',');
-            List<SelectListItem> listStaffCurrent = new List<SelectListItem>();
-            for (int i = 0; i < liststaffs.Length - 1; i++)
-            {
-                int idtatm = int.Parse(liststaffs[i]);
-                string name = (from vnd in db.tour_nhanvien
-                               where vnd.nv_id == idtatm
-                               select vnd.nv_ten).First().ToString();
-                string cmnd = (from vnd in db.tour_nhanvien
-                               where vnd.nv_id == idtatm
-                               select vnd.nv_cmnd).First().ToString();
-
-                listStaffCurrent.Add(new SelectListItem { Value = liststaffs[i], Text = name + "-" + cmnd });
-            }
-            ViewBag.listStaffCurrent = listStaffCurrent;
+           
 
             ViewBag.idtourcurrent = id;
             //end
