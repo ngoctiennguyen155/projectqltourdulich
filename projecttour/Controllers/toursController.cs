@@ -109,7 +109,8 @@ namespace projecttour.Controllers
                 for (int i = 1; i < array.Length; i++)
                 {
                     tour_chitiet oneTour_chitiet = new tour_chitiet();
-                    int generateIdTour_chitiet = (from id in db.tour_chitiet select id).Max(e => e.ct_id);
+                    int generateIdTour_chitiet = 0;
+                    if(db.tour_chitiet.ToList().Count>0) generateIdTour_chitiet =(from id in db.tour_chitiet select id).Max(e => e.ct_id);
                     oneTour_chitiet.ct_id = generateIdTour_chitiet + 1;
                     oneTour_chitiet.tour_id = tour.tour_id;
                     oneTour_chitiet.dd_id = int.Parse(array[i]);

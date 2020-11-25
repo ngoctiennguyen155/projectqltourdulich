@@ -12,22 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.doan_name)
+           Tên đoàn
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.doan_ngaydi)
+            Ngày đi
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.doan_ngayve)
+            Ngày về
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.doan_chitietchuongtrinh)
+           Chi tiết chương trình
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tour.tour_ten)
+            Tên tour
         </th>
-        <th>Cost</th>
-        <th>Chi phi</th>
+        <th>Giá</th>
+        <th>Chi phí</th>
         <th></th>
     </tr>
     @{ int i = 0;}
@@ -66,12 +66,12 @@
         @{ i++;}
     </td>
     <td>
-        @Html.ActionLink("chi tiet", "Chiphi", new { id = item.doan_id })
+        @Html.ActionLink("Xem", "Chiphi", new { id = item.doan_id })
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.doan_id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.doan_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.doan_id })
+        @Html.ActionLink("Details", "Details", new { id = item.doan_id }) @*|
+        @Html.ActionLink("Delete", "Delete", new { id = item.doan_id })*@
     </td>
 </tr>
     }

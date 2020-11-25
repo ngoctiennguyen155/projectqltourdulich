@@ -73,15 +73,15 @@ namespace projecttour.Controllers
         // GET: tour_nguoidi/Edit/5
         public ActionResult Chitiet(int? id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            }*/
             tour_nguoidi tour_nguoidi = db.tour_nguoidi.Find(id);
-            if (tour_nguoidi == null)
+           /* if (tour_nguoidi == null)
             {
                 return HttpNotFound();
-            }
+            }*/
             List<thongke> listtk = new List<thongke>();
             
             ViewBag.listTour = db.tours.ToList();

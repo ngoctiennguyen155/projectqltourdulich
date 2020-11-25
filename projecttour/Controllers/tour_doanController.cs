@@ -115,7 +115,7 @@ namespace projecttour.Controllers
                                 .ToList();
             //load data staffs
             ViewBag.staffs = db.tour_nhanvien
-                                .Select(c => new SelectListItem { Value = c.nv_id.ToString(), Text = c.nv_ten + "-" + c.nv_cmnd })
+                                .Select(c => new SelectListItem { Value = c.nv_id.ToString(), Text = c.nv_ten + "-" + c.nv_nhiemvu })
                                 .ToList();
            
            
@@ -138,26 +138,29 @@ namespace projecttour.Controllers
                 listStaffCurrent.Add(new SelectListItem { Value = liststaffs[i], Text = name + "-" + cmnd });
             }
             ViewBag.listStaffCurrent = listStaffCurrent;
+
+            ViewBag.idtourcurrent = id;
             //end
             //start load customers current
-            string getstringcustomer = (from vnd in db.tour_nguoidi
-                                     where vnd.doan_id == id
-                                     select vnd.nguoidi_dskhachhang).First().ToString();
-            string[] listcustomers = getstringcustomer.Split(',');
+            
             List<SelectListItem> listcustomerCurrent = new List<SelectListItem>();
-            for (int i = 0; i < listcustomers.Length - 1; i++)
+            if(db.tour_nguoidi.Where(e => e.doan_id == id && e.nguoidi_dsnhanvien == "0").ToList().Count>0)
+            db.tour_nguoidi.Where(e => e.doan_id == id && e.nguoidi_dsnhanvien=="0").ToList().ForEach(ee =>
             {
-                int idtatm = int.Parse(listcustomers[i]);
-                string name = (from vnd in db.tour_khachhang
-                               where vnd.kh_id == idtatm
-                               select vnd.kh_ten).First().ToString();
-                string cmnd = (from vnd in db.tour_khachhang
-                               where vnd.kh_id == idtatm
-                               select vnd.kh_cmnd).First().ToString();
-
-                listcustomerCurrent.Add(new SelectListItem { Value = listcustomers[i], Text = name + "-" + cmnd });
-            }
+                listcustomerCurrent.Add(new SelectListItem { Value = ee.nguoidi_dskhachhang, Text = db.tour_khachhang.Where(eee => eee.kh_id.ToString() == ee.nguoidi_dskhachhang).Select(eee => eee.kh_ten).First() + "-" + db.tour_khachhang.Where(eee => eee.kh_id.ToString() == ee.nguoidi_dskhachhang).Select(eee => eee.kh_cmnd).First() });
+            });
+            
             ViewBag.listcustomerCurrent = listcustomerCurrent;
+
+            List<SelectListItem> liststaffCurrent = new List<SelectListItem>();
+            if (db.tour_nguoidi.Where(e => e.doan_id == id && e.nguoidi_dsnhanvien == "0").ToList().Count > 0)
+                db.tour_nguoidi.Where(e => e.doan_id == id && e.nguoidi_dskhachhang == "0").ToList().ForEach(ee =>
+            {
+                liststaffCurrent.Add(new SelectListItem { Value = ee.nguoidi_dsnhanvien, Text = db.tour_nhanvien.Where(eee => eee.nv_id.ToString() == ee.nguoidi_dsnhanvien).Select(eee => eee.nv_ten).First() + "-" + db.tour_nhanvien.Where(eee => eee.nv_id.ToString() == ee.nguoidi_dsnhanvien).Select(eee => eee.nv_nhiemvu).First() });
+            });
+
+            ViewBag.listcustomerCurrent = listcustomerCurrent;
+            ViewBag.listStaffCurrent = liststaffCurrent;
             //end
             if (id == null)
             {
@@ -170,7 +173,57 @@ namespace projecttour.Controllers
             }
             return View(tour_doan);
         }
+        [HttpPost]
+        public ActionResult Detail( ICollection<string> listCustommer, ICollection<string> listStaffs)
+        {
+            string[] array = new string[listCustommer.Count];
+            listCustommer.CopyTo(array, 0);
 
+            string[] array1 = new string[listStaffs.Count];
+            listStaffs.CopyTo(array1, 0);
+            TempData["idplace"] = "<script>alert('" + array[0] + "');</script>";
+
+            int idcurrentdoan = int.Parse(Request["idcurrent"]);
+            // delete all khach hang vs nhan vien
+            db.tour_nguoidi.Where(e => e.doan_id == idcurrentdoan).ToList().ForEach(ee =>
+             {
+                 db.tour_nguoidi.Remove(db.tour_nguoidi.Where(eee => eee.nguoidi_id == ee.nguoidi_id).FirstOrDefault());
+                 db.SaveChanges();
+             });
+            //
+            
+            for (int i = 1; i < array.Length; i++)
+            {
+                int generateId = 0;
+                if (db.tour_nguoidi.ToList().Count > 0)
+                {
+                    generateId = (from id in db.tour_nguoidi select id).Max(e => e.nguoidi_id);
+                }
+                tour_nguoidi ndtam = new tour_nguoidi();
+                ndtam.nguoidi_id = generateId + 1;
+                ndtam.doan_id = idcurrentdoan;
+                ndtam.nguoidi_dsnhanvien = "0";
+                ndtam.nguoidi_dskhachhang = array[i];
+                db.tour_nguoidi.Add(ndtam);
+                db.SaveChanges();
+            }
+            for (int i = 1; i < array1.Length; i++)
+            {
+                int generateId = 0;
+                if (db.tour_nguoidi.ToList().Count > 0)
+                {
+                    generateId = (from id in db.tour_nguoidi select id).Max(e => e.nguoidi_id);
+                }
+                tour_nguoidi ndtam = new tour_nguoidi();
+                ndtam.nguoidi_id = generateId + 1;
+                ndtam.doan_id = idcurrentdoan;
+                ndtam.nguoidi_dsnhanvien = array1[i];
+                ndtam.nguoidi_dskhachhang = "0";
+                db.tour_nguoidi.Add(ndtam);
+                db.SaveChanges();
+            }
+            return Redirect("https://localhost:44341/tour_doan/Details/" + idcurrentdoan);
+        }
         // GET: tour_doan/Create
         public ActionResult Create()
         {

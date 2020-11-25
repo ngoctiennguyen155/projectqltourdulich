@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Html.Raw(TempData["msg"])
+@Html.Raw(TempData["idplace"])
 <h2>Index</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,25 +16,25 @@
             @*@Html.DisplayNameFor(model => model.tour_ten)*@
         </th>
         <th>
-            Name
+            Tên tour
             @*@Html.DisplayNameFor(model => model.tour_ten)*@
         </th>
         <th>
-            Description
+            Mô tả
             @* @Html.DisplayNameFor(model => model.tour_mota)*@
         </th>
         <th>
-            Status
+            Trạng thái
             @*@Html.DisplayNameFor(model => model.block)*@
         </th>
         <th>
-            Type
+            Loại tour
             @*@Html.DisplayNameFor(model => model.tour_loai.loai_ten)*@
         </th>
         <th>
-            Cost
+           Giá
         </th>
-        <th>Options</th>
+        <th>Địa điểm</th>
     </tr>
 
     @foreach (var item in Model)
@@ -55,11 +55,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
             </td>
-            <td><a href="/tour_gia?tour=@item.tour_id">View</a></td>
+            <td><a href="/tour_gia?tour=@item.tour_id">Xem</a></td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.tour_id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.tour_id })
+               @* @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |*@
+                @Html.ActionLink("Xem", "Details", new { id = item.tour_id }) 
+            @*    @Html.ActionLink("Delete", "Delete", new { id = item.tour_id })*@
             </td>
         </tr>
     }

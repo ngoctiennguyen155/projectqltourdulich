@@ -4,121 +4,176 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Details</h2>
+@using (Html.BeginForm("Detail", "tour_doan", FormMethod.Post))
+{
+    <div class="container">
+        <input type="text" value="@ViewBag.idtourcurrent" name="idcurrent" />
 
-<div class="container">
-    
-    
-    <div class="row">
-        <div class="col-md-4">
-            <h4>tour_doan</h4>
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.doan_name)
-                </dt>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Chi tiết đoàn</h4>
+                <dl class="dl-horizontal">
+                    <dt>
+                        Tên đoàn
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.doan_name)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.doan_name)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.doan_ngaydi)
-                </dt>
+                    <dt>
+                        Ngày đi
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.doan_ngaydi)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.doan_ngaydi)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.doan_ngayve)
-                </dt>
+                    <dt>
+                        Ngày về
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.doan_ngayve)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.doan_ngayve)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.doan_chitietchuongtrinh)
-                </dt>
+                    <dt>
+                        Chi tiết chương trình
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.doan_chitietchuongtrinh)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.doan_chitietchuongtrinh)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.tour.tour_ten)
-                </dt>
+                    <dt>
+                        Tên tour
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.tour.tour_ten)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.tour.tour_ten)
+                    </dd>
 
-            </dl>
+                </dl>
 
-        </div>
-        <div class="col-md-4">
-            <h4>Customers</h4>
-            <p>Current List</p>
+            </div>
 
-            <ul>
-                @foreach (var e in ViewBag.listcustomerCurrent)
-                {
-                    @*<p>@e.Value</p>
-            <p>@e.Text</p>*@
-                    <li>@e.Text</li>
-                }
-            </ul>
-            <p>----</p>
-            <ul id="listcustomers">
-                @*<li>123</li>*@
-                
-            </ul>
-            <select class="form-control" id="dropdowncustomers" name="diadiem">
-                <option value="0" selected>Select a customer</option>
-                @foreach (var item in ViewBag.customers)
-                {
-                    <option value="@item.Value">@item.Text</option>
-                }
-            </select>
-            <input type="button" value="Add customer" id="addcustomer" />
-        </div>
-        <div class="col-md-4">
-            <h4>Staffs</h4>
-            <p>Current List</p>
-            <ul>
-                @foreach (var e in ViewBag.listStaffCurrent)
-                {
-                    @*<p>@e.Value</p>
-                <p>@e.Text</p>*@
-                    <li>@e.Text</li>
-                }
-            </ul>
-            <p>----</p>
-            <ul id="liststaffs">
-                @*<li>123</li>*@
+            <div class="col-md-4">
+                <h4>Danh sách hành khách</h4>
 
-            </ul>
-            <select class="form-control" id="dropdownstaffs" name="diadiem">
-                <option value="0" selected>Select a staff</option>
-                @foreach (var item in ViewBag.staffs)
-                {
-                    <option value="@item.Value">@item.Text</option>
-                }
-            </select>
-            <input type="button" value="Add staff" id="addstaff" />
+                <ul id="listcustomers">
+                    <input type="text" name="listCustommer" value="0" hidden />
+                    @foreach (var e in ViewBag.listcustomerCurrent)
+                    {
+                        @*<p>@e.Value</p>
+                            <p>@e.Text</p>*@
+                        <li class="list-group-item">
+                            <input type="text" name="listCustommer" value="@e.Value" hidden />
+                            <span class="name">@e.Text</span>
+                            <label class="btn btn-default btn-xs pull-right remove-item">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </label>
+                        </li>
+                    }
+
+                </ul>
+                <select class="form-control" id="dropdowncustomers" name="diadiem">
+                    <option value="0" selected>Select a customer</option>
+                    @foreach (var item in ViewBag.customers)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                <input type="button" value="Add customer" id="addcustomer" />
+            </div>
+            <div class="col-md-4">
+                <h4>Danh sách nhân viên</h4>
+
+                <ul id="liststaffs">
+                    <input type="text" name="listStaffs" value="0" hidden />
+                    @foreach (var e in ViewBag.listStaffCurrent)
+                    {
+                        @*<p>@e.Value</p>
+                            <p>@e.Text</p>*@
+
+                        <li class="list-group-item">
+                            <input type="text" name="listStaffs" value="@e.Value" hidden />
+                            <span class="name">@e.Text</span>
+                            <label class="btn btn-default btn-xs pull-right remove-item">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </label>
+                        </li>
+                    }
+
+                </ul>
+                <select class="form-control" id="dropdownstaffs" name="diadiem">
+                    <option value="0" selected>Select a staff</option>
+                    @foreach (var item in ViewBag.staffs)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                <input type="button" value="Add staff" id="addstaff" />
+            </div>
         </div>
     </div>
-</div>
-<div>
+    <div>
 
 
-</div>
-<input type="submit" value="Update" id="submitdoan" />
+    </div>
+    <input type="submit" value="Update" id="submitdoan" />
+}
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.doan_id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 @section Scripts {
     @Scripts.Render("~/Scripts/custom.js")
+    <script>
+        $(document).ready(() => {
+            var closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
+            var i;
+
+            /* Loop through the elements, and hide the parent, when clicked on */
+            for (i = 0; i < closebtns.length; i++) {
+                closebtns[i].addEventListener("click", function () {
+                    $(this).parent().parent().remove();
+                });
+            }
+
+            $('#addcustomer').click(() => {
+                var z = $("#dropdowncustomers > option:selected").val();
+                if (z > 0) {
+                    var zz = $("#dropdowncustomers > option:selected").text();
+                    $('#listcustomers').append('<li class="list-group-item"><input type="text" name="listCustommer" value="' + z + '" hidden /><span class="name">' + zz + '</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"></span></label></li>');
+                }
+                closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
+                for (i = 0; i < closebtns.length; i++) {
+                    closebtns[i].addEventListener("click", function () {
+                        $(this).parent().parent().remove();
+                    });
+                }
+                $("#dropdowncustomers").val(0);
+
+            });
+
+            $('#addstaff').click(() => {
+                var t = $("#dropdownstaffs > option:selected").val();
+                if (t > 0) {
+                    var tt = $("#dropdownstaffs > option:selected").text();
+                    $('#liststaffs').append('<li class="list-group-item"><input type="text" name="listStaffs" value="' + t + '" hidden /><span class="name">' + tt + '</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"></span></label></li>');
+                }
+                closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
+                for (i = 0; i < closebtns.length; i++) {
+                    closebtns[i].addEventListener("click", function () {
+                        $(this).parent().parent().remove();
+                    });
+                }
+                $("#dropdownstaffs").val(0);
+
+            });
+
+
+        });
+    </script>
 }

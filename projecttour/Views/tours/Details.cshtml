@@ -15,7 +15,7 @@
             <h4>tour</h4>
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.tour_ten)
+                   Tên tour
                 </dt>
 
                 <dd>
@@ -23,7 +23,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.tour_mota)
+                  Mô tả
                 </dt>
 
                 <dd>
@@ -31,7 +31,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.block)
+                   Trạng thái
                 </dt>
 
                 <dd>
@@ -39,7 +39,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.tour_loai.loai_ten)
+                   Loại tour
                 </dt>
 
                 <dd>
@@ -53,15 +53,15 @@
 
 
             @* <label class="control-label col-md-3" for="loai_id">Địa điểm</label>*@
-        <div class="col-md-12">
-            <p>Current List</p>
+        
             <ul>
                 @foreach (var item in ViewBag.cityoftour)
                 {
-                    <li>@item.Value - @item.Text</li>
+                    <li style=""><span>@item.Value</span> - <span> @item.Text</span></li>
+                   
                 }
             </ul>
-            <p>----</p>
+           @* <p>----</p>
             @using (Html.BeginForm("Details", "tours", FormMethod.Post))
             {
                 <input hidden type="text" value="" id="currentidtour" name="listPlaces"/>
@@ -77,11 +77,11 @@
                 </select>
                 <input id="addiadiem" type="button" value="Add" />
                 <input id="submitaddplace" type="submit" value="Update" />
-            }
+            }*@
 
         </div>
 
-        </div>
+        
        
 
 
