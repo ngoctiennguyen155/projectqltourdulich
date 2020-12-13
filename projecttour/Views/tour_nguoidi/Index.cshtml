@@ -5,68 +5,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            #
-        </th>
-        <th>
-            Tour
-        </th>
-        <th>
-            Tổng số đoàn đi
-        </th>
-        <th>
-            Tổng doanh thu
-        </th>
-        <th>
-            Tổng chi phí
-        </th>
-        <th>
-            Lãi
-        </th>
-        <th></th>
-    </tr>
+<div class="card w-100">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6 text-danger text-uppercase">
+                <strong>Thống kê Tour</strong>
+            </div>
+        </div>
+    </div>
+    <div class="card-block p-3">
+        <table class="table table-bordered table-hover table-striped w-100">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Tour
+                </th>
+                <th>
+                    Tổng số đoàn đi
+                </th>
+                <th>
+                    Tổng doanh thu
+                </th>
+                <th>
+                    Tổng chi phí
+                </th>
+                <th>
+                    Lãi
+                </th>
+                <th class="text-center">Chức năng</th>
+            </tr>
 
-    @{
-        int i = 1;
-        foreach (var item in Model)
-        {
-            int z = item.tongdanhthu - item.tongchiphi;
-        <tr>
-            <td>
-                @i
-            </td>
-            <td>
-                @item.tour
-            </td>
-            <td>
-                @item.tongdoandi
-            </td>
-            <td>
-                @item.tongdanhthu
-            </td>
-            <td>
-                @item.tongchiphi
-            </td>
-            <td>
-                @z
-            </td>
-            <td>
-                @Html.ActionLink("Chi tiết", "Chitiet", new { id = item.idtour })
-                @*   @Html.ActionLink("Edit", "Edit", new { id=item.nguoidi_id }) |
-        @Html.ActionLink("Details", "Details", new { id=item.nguoidi_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id=item.nguoidi_id })*@
-               
-            </td>
-        </tr>
-            i = i +  1;
-        }
-        }
+            @{
+                int i = 1;
+                foreach (var item in Model)
+                {
+                    int z = item.tongdanhthu - item.tongchiphi;
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @item.tour
+                        </td>
+                        <td>
+                            @item.tongdoandi
+                        </td>
+                        <td>
+                            @item.tongdanhthu
+                        </td>
+                        <td>
+                            @item.tongchiphi
+                        </td>
+                        <td>
+                            @z
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Chitiet",new { id = item.idtour })" class="btn btn-sm btn-success" data-toggle="tooltip" title="Xem">
+                                <span class="fa fa-book-open"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    i = i + 1;
+                }
+            }
 
-    </table>
+        </table>
+    </div>
+</div>
+
+

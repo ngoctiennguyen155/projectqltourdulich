@@ -5,67 +5,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Thêm giá tour</strong>
+                </div>
 
-<div class="form-horizontal">
-    <h4>tour_gia</h4>
-    <hr />
-
-    @using (Html.BeginForm("Create", "tour_gia", FormMethod.Post))
-    {
-        <div class="form-group">
-            <label class="control-label col-md-2" for="gia_sotien">Số tiền</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-number="The field gia_sotien must be a number." id="gia_sotien" name="gia_sotien" type="text" value="" />
-                <span class="field-validation-valid text-danger" data-valmsg-for="gia_sotien" data-valmsg-replace="true"></span>
+                <div class="col-md-6 text-right">
+                    <button type="submit" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm">
+                        <span class="fa fa-plus-square"></span>
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                        <span class="fa fa-reply"></span>
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="gia_tungay">Từ ngày</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-date="The field gia_tungay must be a date." id="gia_tungay" name="gia_tungay" type="date" value="" />
-                <span class="field-validation-valid text-danger" data-valmsg-for="gia_tungay" data-valmsg-replace="true"></span>
+        <div class="card-block p-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tên Tour</label>
+                        <select class="form-control" id="block" name="tour_id">
+                            @{
+                                foreach (var item in ViewBag.tours)
+                                {
+                                    <option value="@item.tour_id">@item.tour_ten</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Số tiền</label>
+                        <input class="form-control text-box single-line" data-val="true" data-val-number="The field gia_sotien must be a number." id="gia_sotien" name="gia_sotien" type="text" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="gia_sotien" data-valmsg-replace="true"></span>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <input class="form-control text-box single-line" data-val="true" data-val-date="The field gia_tungay must be a date." id="gia_tungay" name="gia_tungay" type="date" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="gia_tungay" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <input class="form-control text-box single-line" data-val="true" data-val-date="The field gia_denngay must be a date." id="gia_denngay" name="gia_denngay" type="date" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="gia_denngay" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2" for="gia_denngay">Đến ngày</label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-date="The field gia_denngay must be a date." id="gia_denngay" name="gia_denngay" type="date" value="" />
-                <span class="field-validation-valid text-danger" data-valmsg-for="gia_denngay" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="block">Tên tour</label>
-            <div class="col-md-10">
-
-                <select class="form-control" id="block" name="tour_id">
-                    @{
-                        foreach (var item in ViewBag.tours)
-                        {
-                            <option value="@item.tour_id">@item.tour_ten</option>
-                        }
-                    }
-                </select>
-                <span class="field-validation-valid text-danger" data-valmsg-for="block" data-valmsg-replace="true"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
 
 }
-
-
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    }
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

@@ -5,77 +5,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>tour_khachhang</h4>
-        <hr />
-      @*  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.kh_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.kh_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kh_id, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Thêm khách hàng</strong>
+                </div>
 
-        <div class="form-group">
-           <label class="control-label col-md-2">Họ tên</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.kh_ten, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kh_ten, "", new { @class = "text-danger" })
+                <div class="col-md-6 text-right">
+                    <button type="submit" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm">
+                        <span class="fa fa-plus-square"></span>
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                        <span class="fa fa-reply"></span>
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">SĐT</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.kh_sdt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kh_sdt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Ngày sinh</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.kh_ngaysinh, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kh_ngaysinh, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Email</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.kh_email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kh_email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">CMND</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.kh_cmnd, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kh_cmnd, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="card-block p-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tên khách hàng</label>
+                        @Html.EditorFor(model => model.kh_ten, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.kh_ten, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        @Html.EditorFor(model => model.kh_sdt, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.kh_sdt, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        @Html.EditorFor(model => model.kh_ngaysinh, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.kh_ngaysinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email</label>
+                        @Html.EditorFor(model => model.kh_email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.kh_email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>CMND</label>
+                        @Html.EditorFor(model => model.kh_cmnd, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.kh_cmnd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

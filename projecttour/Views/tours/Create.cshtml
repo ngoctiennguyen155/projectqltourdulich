@@ -1,131 +1,108 @@
-﻿@model projecttour.Models.tour 
+﻿@model projecttour.Models.tour
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Thêm Tour</strong>
+                </div>
 
-    <hr />
-    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.tour_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tour_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tour_id, "", new { @class = "text-danger" })
+                <div class="col-md-6 text-right">
+                    <button type="submit" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm">
+                        <span class="fa fa-plus-square"></span>
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                        <span class="fa fa-reply"></span>
+                    </a>
+                </div>
             </div>
-        </div>*@
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h4>tour</h4>
-                <div class="">
-                    <label class="control-label col-md-2">Name</label>
-                    <div class="col-md-10">
+        </div>
+        <div class="card-block p-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tên Tour</label>
                         @Html.EditorFor(model => model.tour_ten, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.tour_ten, "", new { @class = "text-danger" })
                     </div>
-                </div>
-
-                <div class="">
-                    <label class="control-label col-md-2">Description</label>
-                    <div class="col-md-10">
+                    <div class="form-group">
+                        <label>Mô tả</label>
                         @Html.EditorFor(model => model.tour_mota, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.tour_mota, "", new { @class = "text-danger" })
                     </div>
-                </div>
-
-                <div class="">
-                    <label class="control-label col-md-2">Type</label>
-                    <div class="col-md-10">
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        @Html.DropDownList("block", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.block, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Loại du lịch</label>
                         @Html.DropDownList("loai_id", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.loai_id, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Giá tiền</label>
+                        <ul class="list-group ">
+                            <input type="text" name="listPlaces" value="0" hidden />
+                        </ul>
 
-                <div class="">
-                    <label class="control-label col-md-2">Block</label>
-                    <div class="col-md-10">
-                        @*@Html.EditorFor(model => model.block, new { htmlAttributes = new { @class = "form-control" } })*@
-                        @Html.DropDownList("block", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.block, "", new { @class = "text-danger" })
+                        <select class="form-control" id="dropdowndiadiem" name="diadiem">
+                            <option value="0" selected>Select a place</option>
+                            @foreach (var item in ViewBag.diadiem)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                        <button id="addiadiem" type="button" class="btn btn-sm btn-success form-control mt-3" >
+                            <span class="fa fa-plus"></span>
+                        </button>
                     </div>
                 </div>
             </div>
-           
-            <div class="col-md-6">
-             
-                <h4>List Places</h4>
-
-                <ul class="list-group">
-                    <input type="text" name="listPlaces" value="0" hidden />
-                    
-                </ul>
-
-                <select class="form-control" id="dropdowndiadiem" name="diadiem">
-                    <option value="0" selected>Select a place</option>
-                    @foreach (var item in ViewBag.diadiem)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                <input id="addiadiem" type="button" value="Add" />
-
-            </div>
-        </div>
-
-    </div>
-
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input  type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
+
 
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $(document).ready(() => {
-        var closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
-        var i;
+    <script>
+        $(document).ready(() => {
+            var closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
+            var i;
 
-        /* Loop through the elements, and hide the parent, when clicked on */
-        for (i = 0; i < closebtns.length; i++) {
-            closebtns[i].addEventListener("click", function () {
-                $(this).parent().parent().remove();
-            });
-        }
-
-        $('#addiadiem').click(() => {
-            var z = $("#dropdowndiadiem > option:selected").val();
-            if (z > 0) {
-                var zz = $("#dropdowndiadiem > option:selected").text();
-                $('.list-group').append('<li class="list-group-item"><input type="text" name="listPlaces" value="'+z+'" hidden /><span class="name">'+zz+'</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"></span></label></li>');
-            } 
-            closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
+            /* Loop through the elements, and hide the parent, when clicked on */
             for (i = 0; i < closebtns.length; i++) {
                 closebtns[i].addEventListener("click", function () {
                     $(this).parent().parent().remove();
                 });
             }
-            $("#dropdowndiadiem").val(0);
-            
+
+            $('#addiadiem').click(() => {
+                var z = $("#dropdowndiadiem > option:selected").val();
+                if (z > 0) {
+                    var zz = $("#dropdowndiadiem > option:selected").text();
+                    $('.list-group').append('<li class="list-group-item"><input type="text" name="listPlaces" value="' + z + '" hidden /><span class="name">' + zz + '</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"></span></label></li>');
+                }
+                closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
+                for (i = 0; i < closebtns.length; i++) {
+                    closebtns[i].addEventListener("click", function () {
+                        $(this).parent().parent().remove();
+                    });
+                }
+                $("#dropdowndiadiem").val(0);
+
+            });
         });
-    });
-</script>
+    </script>
 }

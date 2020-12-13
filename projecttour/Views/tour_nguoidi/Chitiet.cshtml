@@ -5,48 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
 
-
-<h2>Index</h2>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12" style="margin-bottom:20px">
-            @using (Html.BeginForm("Chitiet", "tour_nguoidi", FormMethod.Post))
-            {
-                <div style="margin-top:50px">
-                    <p>ViewBag.choose</p>
-                    <label>Select Tour</label>
-                    <select style="width:300px;height:30px;" name="selectedValue">
-
-                        <option selected value="0">Select tour</option>
-                        @{
-                            foreach (var e in ViewBag.listTour)
-                            {
-                                <option selected value="@e.tour_id">@e.tour_ten</option>
-                            }
-                        }
-
-                    </select>
-                    <button style="height:30px">Xem</button>
-
-                </div>
-            }
-
+<div class="card w-100">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6 text-danger text-uppercase">
+                <strong>Danh sách Giá Tour</strong>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                    <span class="fa fa-reply"></span>
+                </a>
+            </div>
         </div>
-        <div>
-            <table class="table table-bordered table-responsive table-hover">
-                <tr>
-                    <th>#</th>
-                    <th>Đoàn đi</th>
-                    <th>Số khách</th>
-                    <th>Giá tour</th>
-                    <th>Doanh thu</th>
-                    <th>Tổng chi phí</th>
-                    <th>Lãi</th>
-                </tr>
-                @{
+    </div>
+    <div class="card-block p-3">
+        @using (Html.BeginForm("Chitiet", "tour_nguoidi", FormMethod.Post))
+        {
+            <p>ViewBag.choose</p>
+            <div class="form-inline">
+                @* <p>@ViewBag.choose</p>*@
+                <label class="mr-3">Chọn tour: </label>
+                <select class="form-control mr-3" name="selectedValue">
+
+                    <option selected value="0">Select tour</option>
+                    @{
+                        foreach (var e in ViewBag.listTour)
+                        {
+                            <option selected value="@e.tour_id">@e.tour_ten</option>
+                        }
+                    }
+
+                </select>
+
+                <button class="btn btn-sm btn-success mr-3">Xem</button>
+            </div>
+        }
+        <table class="table table-bordered table-hover table-striped w-100 mt-3">
+            <tr>
+                <th>#</th>
+                <th>Đoàn đi</th>
+                <th>Số khách</th>
+                <th>Giá tour</th>
+                <th>Doanh thu</th>
+                <th>Tổng chi phí</th>
+                <th>Lãi</th>
+            </tr>
+            @{
                     int i = 1;
                     int tdt = 0;
                     int tcp = 0;
@@ -80,15 +85,10 @@
 
                 </tr>
 
-            </table>
-        </div>
+        </table>
     </div>
 </div>
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

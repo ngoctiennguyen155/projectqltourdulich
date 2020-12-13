@@ -5,37 +5,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>tour_loai</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-           Tên loại
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.loai_ten)
-        </dd>
-
-        <dt>
-            Mô tả
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.loai_mota)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Are you sure you want to delete this?</strong>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Xóa">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                        <span class="fa fa-reply"></span>
+                    </a>
+                </div>
+            </div>
         </div>
-    }
-</div>
+    </div>
+
+}

@@ -3,21 +3,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12" style="margin-bottom:20px">
-            @using (Html.BeginForm("Find", "tour_gia", FormMethod.Post)) {
-            <div style="margin-top:50px">
-               @* <p>@ViewBag.choose</p>*@
-                <label>Select Tour</label>
-                <select style="width:300px;height:30px;" name="selectedValue">
+<div class="card w-100">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6 text-danger text-uppercase">
+                <strong>Danh sách Giá Tour</strong>
+            </div>
+
+            <div class="col-md-6 text-right">
+                <a href="/tour_gia/Create" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm mới">
+                    <span class="fa fa-plus-square"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-block p-3">
+        @using (Html.BeginForm("Find", "tour_gia", FormMethod.Post))
+        {
+            <div class="form-inline">
+                @* <p>@ViewBag.choose</p>*@
+                <label class="mr-3">Chọn tour: </label>
+                <select class="form-control mr-3" name="selectedValue">
                     @{
                         if (ViewBag.choose == 0)
                         {
                             <option selected value="0">Select tour</option>
-                            
+
                         }
                         else
                         {
@@ -36,38 +48,54 @@
                         }
                     }
                 </select>
-                <button style="height:30px">Xem</button>
-                <a style="border:1px solid;text-decoration:none;color:black;padding:7px 20px ; " href="/tour_gia/Create">Add cost</a>
+                <button class="btn btn-sm btn-success mr-3">Xem</button>
             </div>
-            }
-                
-        </div>
-        <div>
-            <table class="table table-bordered table-responsive table-hover">
-                <tr>
-                    <th>STT</th>
-                    <th>Cost</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th></th>
-                </tr>
-                @{ int i = 1;}
-                @foreach (var item in ViewBag.Costs)
-                {
-                    <tr>
-                        <td>@i</td>
-                        <td>@item.gia_sotien</td>
-                        <td>@item.gia_tungay.ToString(string.Format("dd/MM/yyyy"))</td>
-                        <td>@item.gia_denngay.ToString(string.Format("dd/MM/yyyy"))</td>
-                        <td><a href="/tour_gia/Edit/@item.gia_id">Edit</a></td>
-                        @{ i++;}
-                    </tr>
-                }
+        }
+    <table class="table table-bordered table-hover table-striped w-100 mt-3">
+        <tr>
+            <th>
+                STT
+                @*@Html.DisplayNameFor(model => model.tour_ten)*@
+            </th>
+            <th>
+                Cost
+                @*@Html.DisplayNameFor(model => model.tour_ten)*@
+            </th>
+            <th>
+                From
+                @* @Html.DisplayNameFor(model => model.tour_mota)*@
+            </th>
+            <th>
+                To
+                @*@Html.DisplayNameFor(model => model.block)*@
+            </th>
+            <th>
+                Chức năng
+            </th>
+        </tr>
+        @{ int i = 1;}
+        @foreach (var item in ViewBag.Costs)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @item.gia_sotien
+                </td>
+                <td>
+                    @item.gia_tungay.ToString(string.Format("dd/MM/yyyy"))
+                </td>
+                <td>
+                   @item.gia_denngay.ToString(string.Format("dd/MM/yyyy"))
+                </td>
+                <td>
+                    <a href="/tour_gia/Edit/@item.gia_id" class="btn btn-sm btn-success" data-toggle="tooltip" title="Sửa"><span class="fa fa-cog"></span></a>
+                </td>
+                @{ i++;}
+            </tr>
+        }
 
-            </table>
-        </div>
+    </table>
     </div>
 </div>
-<div>
-    <a href="https://localhost:44341/tours">Back to List</a>
-</div>
+
+

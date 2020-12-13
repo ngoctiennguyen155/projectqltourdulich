@@ -5,36 +5,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Tên loại
-        </th>
-        <th>
-            Mô tả
-        </th>
-        <th></th>
-    </tr>
+<div class="card w-100">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6 text-danger text-uppercase">
+                <strong>Danh sách các loại du lịch</strong>
+            </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.loai_ten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.loai_mota)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.loai_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.loai_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.loai_id })
-        </td>
-    </tr>
-}
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Create")" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm mới">
+                    <span class="fa fa-plus-square"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-block p-3">
+        <table class="table table-bordered table-hover table-striped w-100">
+            <tr>
+                <th>
+                    Tên loại
+                </th>
+                <th>
+                    Mô tả
+                </th>
+                <th class="text-center">
+                    Chức năng
+                </th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.loai_ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loai_mota)
+            </td>
+            <td class="text-center">
+                <a href="@Url.Action("Edit",new { id = item.loai_id })" class="btn btn-sm btn-success" data-toggle="tooltip" title="Sửa">
+                    <span class="fa fa-cog"></span>
+                </a>
+                <a href="@Url.Action("Delete",new { id = item.loai_id })" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Xóa">
+                    <span class="fa fa-trash"></span>
+                </a>
+            </td>
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>

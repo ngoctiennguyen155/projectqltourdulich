@@ -4,64 +4,82 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Html.Raw(TempData["idplace"])
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            #
-            @*@Html.DisplayNameFor(model => model.tour_ten)*@
-        </th>
-        <th>
-            Tên tour
-            @*@Html.DisplayNameFor(model => model.tour_ten)*@
-        </th>
-        <th>
-            Mô tả
-            @* @Html.DisplayNameFor(model => model.tour_mota)*@
-        </th>
-        <th>
-            Trạng thái
-            @*@Html.DisplayNameFor(model => model.block)*@
-        </th>
-        <th>
-            Loại tour
-            @*@Html.DisplayNameFor(model => model.tour_loai.loai_ten)*@
-        </th>
-        <th>
-           Giá
-        </th>
-        <th>Địa điểm</th>
-    </tr>
+<div class="card w-100">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6 text-danger text-uppercase">
+                <strong>Danh sách Tour</strong>
+            </div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.tour_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tour_ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tour_mota)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.block)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
-            </td>
-            <td><a href="/tour_gia?tour=@item.tour_id">Xem</a></td>
-            <td>
-               @* @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |*@
-                @Html.ActionLink("Xem", "Details", new { id = item.tour_id }) 
-            @*    @Html.ActionLink("Delete", "Delete", new { id = item.tour_id })*@
-            </td>
-        </tr>
-    }
+            <div class="col-md-6 text-right">
+                <a href="@Url.Action("Create")" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm mới">
+                    <span class="fa fa-plus-square"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-block p-3">
+        <table class="table table-bordered table-hover table-striped w-100">
+                <tr>
+                    <th>
+                        #
+                        @*@Html.DisplayNameFor(model => model.tour_ten)*@
+                    </th>
+                    <th>
+                        Tên tour
+                        @*@Html.DisplayNameFor(model => model.tour_ten)*@
+                    </th>
+                    <th>
+                        Mô tả
+                        @* @Html.DisplayNameFor(model => model.tour_mota)*@
+                    </th>
+                    <th>
+                        Trạng thái
+                        @*@Html.DisplayNameFor(model => model.block)*@
+                    </th>
+                    <th>
+                        Loại tour
+                        @*@Html.DisplayNameFor(model => model.tour_loai.loai_ten)*@
+                    </th>
+                    <th>
+                        Giá
+                    </th>
+                    <th>Địa điểm</th>
+                </tr>
 
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tour_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tour_ten)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tour_mota)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.block)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tour_loai.loai_ten)
+                        </td>
+                        <td>
+                            <a href="/tour_gia?tour=@item.tour_id" class="btn btn-sm btn-success" data-toggle="tooltip" title="Xem">
+                                <span class="fa fa-book-open"></span>
+                            </a>
+                        </td>
+                        <td>
+                            @* @Html.ActionLink("Edit", "Edit", new { id = item.tour_id }) |*@
+                            <a href="@Url.Action("Details",new { id = item.tour_id })" class="btn btn-sm btn-success" data-toggle="tooltip" title="Xem">
+                                <span class="fa fa-book-open"></span>
+                            </a>
+                            @*    @Html.ActionLink("Delete", "Delete", new { id = item.tour_id })*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+</div>
