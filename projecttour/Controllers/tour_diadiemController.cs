@@ -51,7 +51,7 @@ namespace projecttour.Controllers
             if (ModelState.IsValid)
             {
                 int generateId = 0;
-                if (db.tour_diadiem.ToList().Count > 0) generateId = (from id in db.tour_khachhang select id).Max(e => e.kh_id);
+                if (db.tour_diadiem.ToList().Count > 0) generateId = (from id in db.tour_diadiem select id).Max(e => e.dd_id);
                 tour_diadiem.dd_id = generateId + 1;
                 db.tour_diadiem.Add(tour_diadiem);
                 db.SaveChanges();
