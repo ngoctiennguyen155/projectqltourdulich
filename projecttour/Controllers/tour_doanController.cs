@@ -223,8 +223,7 @@ namespace projecttour.Controllers
         public ActionResult Create([Bind(Include = "doan_id,tour_id,doan_name,doan_ngaydi,doan_ngayve,doan_chitietchuongtrinh")] tour_doan tour_doan)
         {
             //Request["cost"] idtour
-            string txt = Request["costvalue"];
-            int stsb = int.Parse(txt);
+            int stsb = int.Parse(Request["costvalue"]);
             int zzz = db.tour_gia.Where(a => a.gia_sotien == stsb && a.tour_id== tour_doan.tour_id)
                      .Select(a => a.gia_id)
                      .First();
