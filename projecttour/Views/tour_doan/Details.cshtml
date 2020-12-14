@@ -25,7 +25,7 @@
         </div>
         <div class="card-block p-3">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <h4>Chi tiết đoàn</h4>
                     <dl class="dl-horizontal">
                         <dt>
@@ -47,7 +47,7 @@
 
                     </dl>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <ul id="listcustomers">
                         <input type="text" name="listCustommer" value="0" hidden />
                         @foreach (var e in ViewBag.listcustomerCurrent)
@@ -58,7 +58,7 @@
                                 <input type="text" name="listCustommer" value="@e.Value" hidden />
                                 <span class="name">@e.Text</span>
                                 <label class="btn btn-default btn-xs pull-right remove-item">
-                                    <span class="glyphicon glyphicon-remove"></span>
+                                    <span class="glyphicon glyphicon-remove"><span class="fa fa-trash"></span></span>
                                 </label>
                             </li>
                         }
@@ -76,7 +76,7 @@
 
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <input type="text" name="listStaffs" value="0" hidden />
                     <ul id="liststaffs">
 
@@ -89,7 +89,7 @@
                                 <input type="text" name="listStaffs" value="@e.Value" hidden />
                                 <span class="name">@e.Text</span>
                                 <label class="btn btn-default btn-xs pull-right remove-item">
-                                    <span class="glyphicon glyphicon-remove"></span>
+                                    <span class="glyphicon glyphicon-remove"><span class="fa fa-trash"></span></span>
                                 </label>
                             </li>
                         }
@@ -139,7 +139,7 @@
                 var z = $("#dropdowncustomers > option:selected").val();
                 if (z > 0) {
                     var zz = $("#dropdowncustomers > option:selected").text();
-                    $('#listcustomers').append('<li class="list-group-item"><input type="text" name="listCustommer" value="' + z + '" hidden /><span class="name">' + zz + '</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"></span></label></li>');
+                    $('#listcustomers').append('<li class="list-group-item"><input type="text" name="listCustommer" value="' + z + '" hidden /><span class="name">' + zz + '</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"><span class="fa fa-trash"></span></span></label></li>');
                 }
                 closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
                 for (i = 0; i < closebtns.length; i++) {
@@ -155,7 +155,7 @@
                 var t = $("#dropdownstaffs > option:selected").val();
                 if (t > 0) {
                     var tt = $("#dropdownstaffs > option:selected").text();
-                    $('#liststaffs').append('<li class="list-group-item"><input type="text" name="listStaffs" value="' + t + '" hidden /><span class="name">' + tt + '</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"></span></label></li>');
+                    $('#liststaffs').append('<li class="list-group-item"><input type="text" name="listStaffs" value="' + t + '" hidden /><span class="name">' + tt + '</span><label class="btn btn-default btn-xs pull-right remove-item"> <span class="glyphicon glyphicon-remove"><span class="fa fa-trash"></span></span></label></li>');
                 }
                 closebtns = document.getElementsByClassName("glyphicon glyphicon-remove");
                 for (i = 0; i < closebtns.length; i++) {
