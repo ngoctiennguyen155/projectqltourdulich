@@ -4,124 +4,118 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Details</h2>
+
 @using (Html.BeginForm("Detail", "tour_doan", FormMethod.Post))
 {
-    <div class="container">
-       @* <input type="text" value="@ViewBag.idtourcurrent" name="idcurrent" />*@
+    @Html.AntiForgeryToken()
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Thêm người đi</strong>
+                </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                <h4>Chi tiết đoàn</h4>
-                <dl class="dl-horizontal">
-                    <dt>
-                        Tên đoàn
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.doan_name)
-                    </dd>
-
-                    <dt>
-                        Ngày đi
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.doan_ngaydi)
-                    </dd>
-
-                    <dt>
-                        Ngày về
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.doan_ngayve)
-                    </dd>
-
-                    <dt>
-                        Chi tiết chương trình
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.doan_chitietchuongtrinh)
-                    </dd>
-
-                    <dt>
-                        Tên tour
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tour.tour_ten)
-                    </dd>
-
-                </dl>
-
-            </div>
-
-            <div class="col-md-4">
-                <h4>Danh sách hành khách</h4>
-
-                <ul id="listcustomers">
-                    <input type="text" name="listCustommer" value="0" hidden />
-                    @foreach (var e in ViewBag.listcustomerCurrent)
-                    {
-                        @*<p>@e.Value</p>
-                            <p>@e.Text</p>*@
-                        <li class="list-group-item">
-                            <input type="text" name="listCustommer" value="@e.Value" hidden />
-                            <span class="name">@e.Text</span>
-                            <label class="btn btn-default btn-xs pull-right remove-item">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </label>
-                        </li>
-                    }
-
-                </ul>
-                <select class="form-control" id="dropdowncustomers" name="diadiem">
-                    <option value="0" selected>Select a customer</option>
-                    @foreach (var item in ViewBag.customers)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                <input type="button" value="Add customer" id="addcustomer" />
-            </div>
-            <div class="col-md-4">
-                <h4>Danh sách nhân viên</h4>
-
-                <ul id="liststaffs">
-                    <input type="text" name="listStaffs" value="0" hidden />
-                    @foreach (var e in ViewBag.listStaffCurrent)
-                    {
-                        @*<p>@e.Value</p>
-                            <p>@e.Text</p>*@
-
-                        <li class="list-group-item">
-                            <input type="text" name="listStaffs" value="@e.Value" hidden />
-                            <span class="name">@e.Text</span>
-                            <label class="btn btn-default btn-xs pull-right remove-item">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </label>
-                        </li>
-                    }
-
-                </ul>
-                <select class="form-control" id="dropdownstaffs" name="diadiem">
-                    <option value="0" selected>Select a staff</option>
-                    @foreach (var item in ViewBag.staffs)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                <input type="button" value="Add staff" id="addstaff" />
+                <div class="col-md-6 text-right">
+                    
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                        <span class="fa fa-reply"></span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <div>
+        <div class="card-block p-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Chi tiết đoàn</h4>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Tên đoàn
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.doan_name)
+                        </dd>
 
 
+                        <dt>
+                            Tên tour
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.tour.tour_ten)
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <ul id="listcustomers">
+                        <input type="text" name="listCustommer" value="0" hidden />
+                        @foreach (var e in ViewBag.listcustomerCurrent)
+                        {
+                            @*<p>@e.Value</p>
+                        <p>@e.Text</p>*@
+                            <li class="list-group-item">
+                                <input type="text" name="listCustommer" value="@e.Value" hidden />
+                                <span class="name">@e.Text</span>
+                                <label class="btn btn-default btn-xs pull-right remove-item">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </label>
+                            </li>
+                        }
+
+                    </ul>
+                    <select class="form-control" id="dropdowncustomers" name="diadiem">
+                        <option value="0" selected>Select a customer</option>
+                        @foreach (var item in ViewBag.customers)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <input type="button" value="Add customer" class="btn btn-sm btn-success mt-3" id="addcustomer" />
+
+
+
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="listStaffs" value="0" hidden />
+                    <ul id="liststaffs">
+
+                        @foreach (var e in ViewBag.listStaffCurrent)
+                        {
+                            @*<p>@e.Value</p>
+                <p>@e.Text</p>*@
+
+                            <li class="list-group-item">
+                                <input type="text" name="listStaffs" value="@e.Value" hidden />
+                                <span class="name">@e.Text</span>
+                                <label class="btn btn-default btn-xs pull-right remove-item">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </label>
+                            </li>
+                        }
+
+                    </ul>
+                    <select class="form-control" id="dropdownstaffs" name="diadiem">
+                        <option value="0" selected>Select a staff</option>
+                        @foreach (var item in ViewBag.staffs)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <input type="button" value="Add staff" class="btn btn-sm btn-success mt-3" id="addstaff" />
+
+
+
+                </div>
+            </div>
+            <div class="text-center">
+                <input type="submit" class="btn btn-sm btn-success" value="Update" id="submitdoan" />
+            </div>
+            
+        </div>
     </div>
-    <input type="submit" value="Update" id="submitdoan" />
+
+
 }
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.doan_id }) |
