@@ -4,40 +4,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="container>
-    <div class="row">
-        @using (Html.BeginForm("Chiphi", "tour_doan", FormMethod.Post))
-        {
-            <div class="col-md-6">
-
-                <h2>Chiphi</h2>
-                <div class="col-md-12">
-                    <label class="control-label col-md-4" for="tour_id">tour name</label>
-                    <div class="col-md-8">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Chi phí</strong>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                        <span class="fa fa-reply"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-block p-3">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Tên tour</label>
                         <select class="form-control" id="tour_id" name="tour_id" disabled>
                             <option value="@ViewBag.tour_id.Value">@ViewBag.tour_id.Text</option>
 
                         </select>
                         <span class="field-validation-valid text-danger" data-valmsg-for="tour_id" data-valmsg-replace="true"></span>
+                        <input type="text" value="@ViewBag.tour_id.Value" name="tour_id" hidden />
                     </div>
-                    <input type="text" value="@ViewBag.tour_id.Value" name="tour_id" hidden />
-                </div>
-                <div class="col-md-12">
-                    <label class="control-label col-md-4" for="tour_id">doan name</label>
-                    <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Tên đoàn</label>
                         <select class="form-control" id="tour_id" name="doan_name" disabled>
 
                             <option value="@ViewBag.doanid">@ViewBag.doanname</option>
 
                         </select>
                         <span class="field-validation-valid text-danger" data-valmsg-for="tour_id" data-valmsg-replace="true"></span>
+                        <input type="text" value="@ViewBag.doanid" name="doan_name" hidden />
                     </div>
-                    <input type="text" value="@ViewBag.doanid" name="doan_name" hidden />
-                </div>
-                <div class="col-md-12">
-                    <label class="control-label col-md-4" for="tour_id">loai chi phi</label>
-                    <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Loại chi phí</label>
                         <select class="form-control" id="tour_id" name="lcp">
 
                             @{
@@ -50,77 +56,62 @@
                         </select>
                         <span class="field-validation-valid text-danger" data-valmsg-for="tour_id" data-valmsg-replace="true"></span>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <label class="control-label col-md-4" for="doan_name">hoa don</label>
-                    <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Hóa đơn</label>
                         <input class="form-control text-box single-line" id="doan_name" name="hoa_don" type="text" value="" />
                         <span class="field-validation-valid text-danger" data-valmsg-for="doan_name" data-valmsg-replace="true"></span>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <label class="control-label col-md-4" for="doan_name">noi dung</label>
-                    <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Nội dung</label>
                         <input class="form-control text-box single-line" id="doan_name" name="noi_dung" type="text" value="" />
                         <span class="field-validation-valid text-danger" data-valmsg-for="doan_name" data-valmsg-replace="true"></span>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <label class="control-label col-md-4" for="doan_ngaydi">ngay hoa don</label>
-                    <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Ngày hóa đơn</label>
                         <input class="form-control text-box single-line" data-val="true" data-val-date="The field doan_ngaydi must be a date." id="doan_ngaydi" name="ngaylhd" type="date" value="" />
                         <span class="field-validation-valid text-danger" data-valmsg-for="doan_ngaydi" data-valmsg-replace="true"></span>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <label class="control-label col-md-4" for="doan_name">sotien</label>
-                    <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Số tiền</label>
                         <input class="form-control text-box single-line" id="doan_name" name="sotien" type="text" value="" />
                         <span class="field-validation-valid text-danger" data-valmsg-for="doan_name" data-valmsg-replace="true"></span>
                     </div>
+                    <button class="btn btn-sm btn-success">Save</button>
                 </div>
-                <button>Save</button>
+                <div class="col-md-7">
+                    <table class="table table-bordered table-hover table-striped w-100">
+                        <tr>
+                            <th>STT</th>
+                            <th>Hoa don</th>
+                            <th>Loai chi phi</th>
+                            <th>Ten chi phi</th>
+                            <th>So tien</th>
+                        </tr>
 
-            </div>
-                                }
-            <div class="col-md-6">
-                <h2>Chi tiet chi phi</h2>
-                <table class="table  table-responsive table-hover">
-                    <tr>
-                        <th>STT</th>
-                        <th>Hoa don</th>
-                        <th>Loai chi phi</th>
-                        <th>Ten chi phi</th>
-                        <th>So tien</th>
-                    </tr>
-                  
-                    @{
-                        int i = 1;
-                        foreach (var e in ViewBag.listchiphii)
-                        {
-                                        <tr>
-                                            <td>@i</td>
-                                            <td>@e.hoadon</td>
-                                            <td>@ViewBag.namechiphi[i-1]</td>
-                                            <td>@e.noidung</td>
-                                            <td>@e.chiphi_total</td>
+                        @{
+                            int i = 1;
+                            foreach (var e in ViewBag.listchiphii)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@e.hoadon</td>
+                                    <td>@ViewBag.namechiphi[i - 1]</td>
+                                    <td>@e.noidung</td>
+                                    <td>@e.chiphi_total</td>
 
 
-                                        </tr>
-                            i = i + 1;
+                                </tr>
+                                i = i + 1;
 
+                            }
                         }
-                    }
 
-                               
-
-
-                </table>
-                <p>Tong tien:<span style="color:red;">@ViewBag.total</span></p>
+                    </table>
+                </div>
             </div>
         </div>
-</div>
+    </div>
 
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+}
+

@@ -5,75 +5,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-           Tên đoàn
-        </th>
-        <th>
-            Ngày đi
-        </th>
-        <th>
-            Ngày về
-        </th>
-        <th>
-           Chi tiết chương trình
-        </th>
-        <th>
-            Tên tour
-        </th>
-        <th>Giá</th>
-        <th>Chi phí</th>
-        <th></th>
-    </tr>
-    @{ int i = 0;}
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.doan_name)
-    </td>
-    <td>
-        @{
-            var x = item.doan_ngaydi.ToString();
-            var t = x.Split(' ');
-            var z = t[0].Split('/');
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Danh sách khách hàng</strong>
+                </div>
 
-        }
-        @z[1]/@z[0]/@z[2]
-    </td>
-    <td>
-        @{
-            var xx = item.doan_ngayve.ToString();
-            var tt = xx.Split(' ');
-            var zz = tt[0].Split('/');
+                <div class="col-md-6 text-right">
+                    <a href="@Url.Action("Create")" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm mới">
+                        <span class="fa fa-plus-square"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-block p-3">
+            <table class="table table-bordered table-hover table-striped w-100">
+                <tr>
+                    <th>
+                        Tên đoàn
+                    </th>
+                    <th>
+                        Ngày đi
+                    </th>
+                    <th>
+                        Ngày về
+                    </th>
+                    <th>
+                        Chi tiết chương trình
+                    </th>
+                    <th>
+                        Tên tour
+                    </th>
+                    <th>Giá</th>
+                    <th>Chi phí</th>
+                    <th class="text-center">
+                        Chức năng
+                    </th>
+                </tr>
 
-        }
-        @zz[1]/@zz[0]/@zz[2]
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.doan_chitietchuongtrinh)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.tour.tour_ten)
-    </td>
-    <td>
-        @ViewBag.CostList[i]
-        @{ i++;}
-    </td>
-    <td>
-        @Html.ActionLink("Xem", "Chiphi", new { id = item.doan_id })
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.doan_id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.doan_id }) @*|
-        @Html.ActionLink("Delete", "Delete", new { id = item.doan_id })*@
-    </td>
-</tr>
-    }
+                @{ int i = 0;}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.doan_name)
+                        </td>
+                        <td>
+                            @{
+                                var x = item.doan_ngaydi.ToString();
+                                var t = x.Split(' ');
+                                var z = t[0].Split('/');
 
-</table>
+                            }
+                            @z[1]/@z[0]/@z[2]
+                        </td>
+                        <td>
+                            @{
+                                var xx = item.doan_ngayve.ToString();
+                                var tt = xx.Split(' ');
+                                var zz = tt[0].Split('/');
+
+                            }
+                            @zz[1]/@zz[0]/@zz[2]
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.doan_chitietchuongtrinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tour.tour_ten)
+                        </td>
+                        <td>
+                            @ViewBag.CostList[i]
+                            @{ i++;}
+                        </td>
+                        <td>
+                            @Html.ActionLink("Xem", "Chiphi", new { id = item.doan_id })
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit",new { id = item.doan_id })" class="btn btn-sm btn-success" data-toggle="tooltip" title="Sửa">
+                                <span class="fa fa-cog"></span>
+                            </a>
+                            <a href="@Url.Action("Delete",new { id = item.doan_id })" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Xóa">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
