@@ -79,8 +79,10 @@
                             @ViewBag.CostList[i]
                             @{ i++;}
                         </td>
-                        <td>
-                            @Html.ActionLink("Xem", "Chiphi", new { id = item.doan_id })
+                        <td class="text-center">
+                            <a href="@Url.Action("Chiphi",new { id = item.doan_id })" class="btn btn-sm btn-success" data-toggle="tooltip" title="Xem">
+                                <span class="fa fa-book-open"></span>
+                            </a>
                         </td>
                         <td class="text-center">
                             <a href="@Url.Action("Edit",new { id = item.doan_id })" class="btn btn-sm btn-success" data-toggle="tooltip" title="Sửa">

@@ -5,92 +5,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <div class="card w-100">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 text-danger text-uppercase">
+                    <strong>Thêm đoàn</strong>
+                </div>
 
-<div class="form-horizontal">
-    <h4>tour_doan</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.doan_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.doan_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.doan_id, "", new { @class = "text-danger" })
+                <div class="col-md-6 text-right">
+                    <button type="submit" class="btn btn-sm btn-success" data-toggle="tooltip" title="Thêm">
+                        <span class="fa fa-plus-square"></span>
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Thoát">
+                        <span class="fa fa-reply"></span>
+                    </a>
+                </div>
             </div>
-        </div>*@
+        </div>
+        <div class="card-block p-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tour</label>
+                        @Html.DropDownList("tour_id", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.tour_id, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Tên Đoàn</label>
+                        @Html.EditorFor(model => model.doan_name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.doan_name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Chi tiết</label>
+                        @Html.EditorFor(model => model.doan_chitietchuongtrinh, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.doan_chitietchuongtrinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email</label>
+                        @Html.EditorFor(model => model.doan_ngaydi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.doan_ngaydi, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Nhiệm vụ</label>
+                        @Html.EditorFor(model => model.doan_ngayve, new { htmlAttributes = new { @class = "datepicker form-control" } })
+                        @Html.ValidationMessageFor(model => model.doan_ngayve, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Giá</label>
+                        <select class="form-control" id="costlist" name="cost">
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Tên tour</label>
-        <div class="col-md-10">
-            @Html.DropDownList("tour_id", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.tour_id, "", new { @class = "text-danger" })
+                            @{
+                                foreach (var e in ViewBag.CostList)
+                                {
+                                    <option value="@e.tour_id">@e.gia_sotien </option>
+                                }
+                            }
+
+                        </select>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Tên đoàn</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.doan_name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.doan_name, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Ngày đi</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.doan_ngaydi, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.doan_ngaydi, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Ngày về</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.doan_ngayve, new { htmlAttributes = new { @class = "datepicker form-control" } })
-            @Html.ValidationMessageFor(model => model.doan_ngayve, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Chi tiết chương trình</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.doan_chitietchuongtrinh, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.doan_chitietchuongtrinh, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2" for="tour_id">Giá</label>
-        <div class="col-md-10">
-            <select class="form-control" id="costlist" name="cost">
-                
-                @{
-                    foreach (var e in ViewBag.CostList)
-                    {
-                        <option value="@e.tour_id">@e.gia_sotien </option>
-                    }
-                }
-
-            </select>
-            <span class="field-validation-valid text-danger" data-valmsg-for="" data-valmsg-replace="true"></span>
-        </div>
-        <input type="text" value="" id="costvalue" name="costvalue" hidden />
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input id="createDoan" type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
 
@@ -101,32 +86,32 @@
             $("#createDoan").click(() => {
                 $("#costvalue").val($("#costlist > option:selected").text());
             })
-        //alert($("option:selected").val());
-        var f = $("option:selected").val();
-        $('#costlist > option').each(function () {
-            if ($(this).val() == f) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-            $('#costlist').val(f);
-        })
-        var filter = $("option:selected").val();
-        $("#tour_id").change(() => {
-           
             //alert($("option:selected").val());
-            var filter = $("option:selected").val();
+            var f = $("option:selected").val();
             $('#costlist > option').each(function () {
-                if ($(this).val() == filter) {
+                if ($(this).val() == f) {
                     $(this).show();
                 } else {
                     $(this).hide();
                 }
-                $('#costlist').val(filter);
+                $('#costlist').val(f);
             })
-        });
+            var filter = $("option:selected").val();
+            $("#tour_id").change(() => {
 
-     });
+                //alert($("option:selected").val());
+                var filter = $("option:selected").val();
+                $('#costlist > option').each(function () {
+                    if ($(this).val() == filter) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                    $('#costlist').val(filter);
+                })
+            });
+
+        });
 
     </script>
 }
